@@ -1,5 +1,6 @@
 package me.arun.androidrxnetworking;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 
 /**
@@ -60,6 +62,15 @@ public class RxNetworkRequest<T>
     {
         retrofit = NetworkingApiClient.getRetrofitClient();
         apiInterfaceService = retrofit.create(ApiInterfaceService.class);
+    }
+
+
+    public Single<ResponseBody> getImageFullUrl(String url)
+    {
+        Retrofit retrofitImage  = NetworkingApiClient.getRetrofitClient();
+        apiInterfaceService = retrofitImage.create(ApiInterfaceService.class);
+     return    apiInterfaceService.getImageSinglePublicRequest(url);
+
     }
 
     public Single<T> makeSingleRequest()

@@ -3,6 +3,9 @@ package me.arun.androidrxnetworking;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -48,6 +51,9 @@ public class NetworkingApiClient {
 
         }
     }
+
+
+
 
 
     public static Retrofit getRetrofitWithHeaders(HashMap<String, String> commonHeaders)
@@ -126,6 +132,14 @@ public class NetworkingApiClient {
         return retrofit;
     }
 
+    public  static Retrofit getRetrofitForImage(String baseUrl){
+        return new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+    }
+
     /**
      * a method to get retrofit instance
      *
@@ -137,12 +151,15 @@ public class NetworkingApiClient {
         if (TextUtils.isEmpty(baseUrl))
             throw new NullPointerException("base url is empty or null");
 
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
 
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(baseUrl).client(okHttpClient)
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
         }
         return retrofit;

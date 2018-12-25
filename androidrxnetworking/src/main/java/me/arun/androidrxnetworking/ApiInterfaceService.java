@@ -108,6 +108,14 @@ public interface ApiInterfaceService<T> {
     Observable<Bitmap> getImageBitMapObservableRequest(@Url String url, @QueryMap Map<String, Object> params);
 
 
+    // for full url from any other website
+    @Streaming
+    @GET
+    Single<ResponseBody> getImageSinglePublicRequest(@Url String url);
+
+
+
+
     //Postv okkhttp3 ResponseBody  request
 
 
