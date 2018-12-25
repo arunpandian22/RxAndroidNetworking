@@ -3,7 +3,6 @@ package me.arun.androidrxnetworking;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
-
 /**
  * Created by Jaison on 18/08/16.
  */

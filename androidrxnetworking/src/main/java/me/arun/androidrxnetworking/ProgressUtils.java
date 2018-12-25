@@ -14,15 +14,13 @@ import android.widget.TextView;
  * Created by Jaison on 03/02/17.
  */
 
-public class ProgressUtils
-{
+public class ProgressUtils {
 
     Context context;
     private Dialog progressDialog;
     boolean isNetworkCall;
 
-    public ProgressUtils(Context context, boolean isNetworkCall)
-    {
+    public ProgressUtils(Context context, boolean isNetworkCall) {
         this.context = context;
         this.isNetworkCall = isNetworkCall;
     }
@@ -39,8 +37,7 @@ public class ProgressUtils
         showDialog(progressBarData);*/
     }
 
-    public void showDialog(ProgressBarData progressBarData)
-    {
+    public void showDialog(ProgressBarData progressBarData) {
         Log.d("util", "show dialog");
         progressDialog = new Dialog(context);
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));

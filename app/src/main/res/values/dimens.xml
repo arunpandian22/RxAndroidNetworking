@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="paddingVertical">@dimen/_13sdp</dimen>
+    <dimen name="paddingHorizontal">@dimen/_13sdp</dimen>
+    <dimen name="radiusCategory">@dimen/_4sdp</dimen>
+</resources>

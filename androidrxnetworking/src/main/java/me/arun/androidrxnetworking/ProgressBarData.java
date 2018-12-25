@@ -5,8 +5,7 @@ import android.graphics.Color;
 /**
  * Created by Jaison.
  */
-public class ProgressBarData
-{
+public class ProgressBarData {
     int DEFAULT_BACKGROUND_COLOR = Color.parseColor("#FFFFFF");
     int DEFAULT_TINT_COLOR = Color.parseColor("#2D9CDB");
     int DEFAULT_TEXT_COLOR = Color.parseColor("#2D9CDB");

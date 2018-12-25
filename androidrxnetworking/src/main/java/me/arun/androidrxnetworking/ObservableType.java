@@ -1,9 +1,7 @@
 package me.arun.androidrxnetworking;
 
 import android.support.annotation.StringDef;
-
 import java.lang.annotation.Retention;
-
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 import static me.arun.androidrxnetworking.ObservableType.COMPLETABLE;
 import static me.arun.androidrxnetworking.ObservableType.FLOWABLE;
