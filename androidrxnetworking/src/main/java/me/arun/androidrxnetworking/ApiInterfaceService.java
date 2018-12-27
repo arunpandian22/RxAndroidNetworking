@@ -1,9 +1,6 @@
 package me.arun.androidrxnetworking;
-
 import android.graphics.Bitmap;
-
 import java.util.Map;
-
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
@@ -26,18 +23,18 @@ import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
-
 /**
  * Created by Arun Pandian M on 21/December/2018
  * arunsachin222@gmail.com
  * Chennai
  */
-public interface ApiInterfaceService<T> {
+public interface ApiInterfaceService<T>
+{
     //Get custom object Request
 
     @Headers({"Accept: application/json"})
     @GET("{url}")
-    Single<T> getSingleObject(@Path("url") String url, @QueryMap Map<String, Object> params);
+    Single<ResponseBody> getSingleObject(@Path("url") String url, @QueryMap Map<String, Object> params);
 
     @Headers({"Accept: application/json"})
     @GET("{url}")

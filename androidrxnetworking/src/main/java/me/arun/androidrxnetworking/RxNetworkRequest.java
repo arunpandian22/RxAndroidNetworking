@@ -2,14 +2,14 @@ package me.arun.androidrxnetworking;
 
 import android.graphics.Bitmap;
 import android.util.Log;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.processors.PublishProcessor;
+import io.reactivex.subjects.PublishSubject;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -27,7 +27,7 @@ public class RxNetworkRequest<T>
     String observableType;
     @ResponseType
     String responseType;
-    private Class<T> responseClaasType;
+    private Class<T> responseClassType;
     private RequestBody requestBody;
     @RequestType
     String requestType;
@@ -41,8 +41,12 @@ public class RxNetworkRequest<T>
 
     private RxNetworkRequest(RxNetworkRequestBuilder rxNetworkRequestBuilder)
     {
+
         this.endPoint = rxNetworkRequestBuilder.endPoint;
-        this.responseClaasType = rxNetworkRequestBuilder.responseClaasType;
+        if (rxNetworkRequestBuilder.responseClaasType!=null)
+        this.responseClassType = rxNetworkRequestBuilder.responseClaasType;
+        else
+
         this.responseType = rxNetworkRequestBuilder.responseType;
         if (rxNetworkRequestBuilder.queryParams != null && !rxNetworkRequestBuilder.queryParams.isEmpty())
             this.queryParams = rxNetworkRequestBuilder.queryParams;
@@ -60,7 +64,7 @@ public class RxNetworkRequest<T>
 
     public void buildApiInterfaceService()
     {
-        retrofit = NetworkingApiClient.getRetrofitClient();
+        retrofit = NetworkingApiClient.getRetrofitWithHeaders(headerParams);
         apiInterfaceService = retrofit.create(ApiInterfaceService.class);
     }
 
@@ -69,7 +73,7 @@ public class RxNetworkRequest<T>
     {
         Retrofit retrofitImage  = NetworkingApiClient.getRetrofitClient();
         apiInterfaceService = retrofitImage.create(ApiInterfaceService.class);
-     return    apiInterfaceService.getImageSinglePublicRequest(url);
+     return   apiInterfaceService.getImageSinglePublicRequest(url);
 
     }
 
@@ -100,6 +104,18 @@ public class RxNetworkRequest<T>
     }
 
 
+    public void makeFlowbleRequest()
+    {
+
+
+    }
+
+
+    public void makeSingleRequest(PublishSubject<T> publishSubject,Map<String,String> queryParam)
+    {
+       RxNetWorkApiCallHelper<T> rxNetWorkApiCallHelper=new RxNetWorkApiCallHelper();
+        rxNetWorkApiCallHelper.call(apiInterfaceService.getSingleObject(endPoint,queryParam),publishSubject,responseClassType);
+    }
 
 
     public Maybe<T> makeMaybeRequest() {
@@ -132,10 +148,11 @@ public class RxNetworkRequest<T>
         private Map<String, String> headerParams = new HashMap<>();
 
 
-        public RxNetworkRequestBuilder(String endPoint, @ObservableType String observableType, @ResponseType String responseType) {
+        public RxNetworkRequestBuilder(String endPoint, @ObservableType String observableType, @ResponseType String responseType,Class<T> responseClaasType) {
             this.endPoint = endPoint;
             this.observableType = observableType;
             this.responseType = responseType;
+            this.responseClaasType=responseClaasType;
         }
 
 

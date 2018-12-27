@@ -4,7 +4,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-public class Network_check {
+public class Network_check
+{
 
     /**
      * Created by Arun Pandian M on 21/December/2018

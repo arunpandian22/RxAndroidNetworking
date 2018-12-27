@@ -23,12 +23,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * arunsachin222@gmail.com
  * Chennai
  */
-public class NetworkingApiClient {
-
+public class NetworkingApiClient
+{
     private static String BASE_URL = "";
     private static Map<String, String> default_headers = new HashMap<>();
     private static Map<String, String> commonHeader = new HashMap<>();
-
     private static OkHttpClient client;
     private static Retrofit retrofit;
     public static final int MAX_CACHE_SIZE = 10 * 1024 * 1024;
@@ -42,10 +41,10 @@ public class NetworkingApiClient {
      */
     public static void setClient(String baseUrl) {
 
+        BASE_URL=baseUrl;
         client = getDefaultClient();
         if (client != null) {
             retrofit = getRetrofitInstance(baseUrl, client);
-
         }
     }
 
@@ -53,9 +52,8 @@ public class NetworkingApiClient {
 
 
 
-    public static Retrofit getRetrofitWithHeaders(HashMap<String, String> commonHeaders)
+    public static Retrofit getRetrofitWithHeaders(Map<String, String> commonHeaders)
     {
-
        return getRetrofitInstance( BASE_URL,get_HTTPClient(commonHeaders));
 
     }
@@ -152,13 +150,13 @@ public class NetworkingApiClient {
                 .setLenient()
                 .create();
 
-        if (retrofit == null) {
+//        if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(baseUrl).client(okHttpClient)
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
-        }
+//        }
         return retrofit;
     }
 
@@ -167,7 +165,8 @@ public class NetworkingApiClient {
      *
      * @return it return the http client with default value
      */
-    public static OkHttpClient getDefaultClient() {
+    public static OkHttpClient getDefaultClient()
+    {
 
         return new OkHttpClient().newBuilder()
                 .followSslRedirects(true)
