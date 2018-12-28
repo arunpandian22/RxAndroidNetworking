@@ -10,7 +10,8 @@ import android.app.Application;
 public class RXNetworkingApplication extends Application {
 
     @Override
-    public void onCreate(){
+    public void onCreate()
+    {
         super.onCreate();
     }
 }

@@ -1,5 +1,4 @@
 package me.arun.andoridrxnetworking.di.module;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -8,7 +7,6 @@ import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
 import me.arun.andoridrxnetworking.di.ActivityContext;
 import me.arun.androidrxnetworking.ProgressUtils;
-
 /**
  * it is a module class  which provide dependencies for Fragment related classes.
  */

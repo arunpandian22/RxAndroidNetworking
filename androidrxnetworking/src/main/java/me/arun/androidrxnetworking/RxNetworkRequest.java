@@ -56,6 +56,11 @@ public class RxNetworkRequest<T>
             this.requestBody=rxNetworkRequestBuilder.requestBody;
         if (rxNetworkRequestBuilder.requestType!=null)
             this.requestType=rxNetworkRequestBuilder.requestType;
+        if (rxNetworkRequestBuilder.file!=null)
+            this.multipartFile=rxNetworkRequestBuilder.file;
+        if (rxNetworkRequestBuilder.file!=null)
+            this.observableType=rxNetworkRequestBuilder.observableType;
+
 
         buildApiInterfaceService();
         Log.d(TAG, "RxNetworkRequest: retrofit"+NetworkingApiClient.getRetrofitClient());
@@ -77,8 +82,95 @@ public class RxNetworkRequest<T>
 
     }
 
+
+
+    public void makeRequest(PublishSubject<T> publishSubject,PublishProcessor<T> publishProcessor)
+    {
+        RxNetWorkApiCallHelper<T> rxNetWorkApiCallHelper=new RxNetWorkApiCallHelper();
+
+        if (requestType == null)
+            throw new IllegalArgumentException("request type must not be null.");
+
+
+        if (observableType == null)
+            throw new IllegalArgumentException("observable type must not be null.");
+
+
+        switch (requestType)
+        {
+            case RequestType.GET:
+                {
+                    switch (observableType)
+                    {
+                        case ObservableType.SINGLE:
+                        rxNetWorkApiCallHelper.call(apiInterfaceService.getSingleObject(endPoint,queryParams),publishSubject,responseClassType);
+                         break;
+                        case ObservableType.MAYBE:
+                            break;
+                        case ObservableType.FLOWABLE:
+                            break;
+                        case ObservableType.COMPLETABLE:
+
+                    }
+            }
+
+                break;
+            case RequestType.POST:
+                switch (observableType)
+                {
+                    case ObservableType.SINGLE:
+                        if (requestBody==null &&  multipartFile==null)
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleResponseBodyRequest(endPoint, queryParams),publishSubject,responseClassType);
+                        else if (requestBody==null)
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleMultipartRequest(endPoint,multipartFile),publishSubject,responseClassType);
+                        else if (multipartFile==null)
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleObjectRequest(endPoint,requestBody),publishSubject,responseClassType);
+                        else
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleMultipartObjectRequestquest(endPoint,queryParams,requestBody,multipartFile),publishSubject,responseClassType);
+                        break;
+                    case ObservableType.MAYBE:
+                        if (requestBody==null &&  multipartFile==null)
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeObjectRequest(endPoint, queryParams),publishSubject,responseClassType);
+                        else if (requestBody==null)
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeMultipartRequest(endPoint,multipartFile),publishSubject,responseClassType);
+                        else if (multipartFile==null)
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeObjectRequest(endPoint,requestBody),publishSubject,responseClassType);
+                        else
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeMultipartObjectRequest(endPoint,queryParams,requestBody,multipartFile),publishSubject,responseClassType);
+                        break;
+
+
+                    case ObservableType.FLOWABLE:
+
+                        if (requestBody==null &&  multipartFile==null)
+                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.postFlowableObjectRequest(endPoint, queryParams),publishProcessor,responseClassType);
+                        else if (requestBody==null)
+                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.postFlowableMultipartRequest(endPoint,multipartFile),publishProcessor,responseClassType);
+                        else if (multipartFile==null)
+                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.postflowableObjectRequest(endPoint,requestBody),publishProcessor,responseClassType);
+                        else
+                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.postFlowableMultipartObjectRequest(endPoint,queryParams,requestBody,multipartFile),publishProcessor,responseClassType);
+                        break;
+                    case ObservableType.COMPLETABLE:
+
+                }
+
+                break;
+
+            case RequestType.PUT:
+                break;
+
+            case RequestType.DELETE:
+                break;
+
+        }
+
+    }
+
+
     public Single<T> makeSingleRequest()
     {
+
         switch (requestType)
         {
             case RequestType.GET:
@@ -111,12 +203,26 @@ public class RxNetworkRequest<T>
     }
 
 
+    /**
+     * test request
+     * @param publishSubject
+     * @param queryParam
+     */
     public void makeSingleRequest(PublishSubject<T> publishSubject,Map<String,String> queryParam)
     {
        RxNetWorkApiCallHelper<T> rxNetWorkApiCallHelper=new RxNetWorkApiCallHelper();
         rxNetWorkApiCallHelper.call(apiInterfaceService.getSingleObject(endPoint,queryParam),publishSubject,responseClassType);
     }
 
+    /**
+     * test imageupload
+     * @return
+     */
+
+    public void makeImageUpload(PublishSubject<T> publishSubject){
+        RxNetWorkApiCallHelper<T> rxNetWorkApiCallHelper=new RxNetWorkApiCallHelper();
+        rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleMultipartRequest(endPoint,multipartFile),publishSubject,responseClassType);
+    }
 
     public Maybe<T> makeMaybeRequest() {
         return  apiInterfaceService.getMaybeObject(endPoint,queryParams);
@@ -140,6 +246,8 @@ public class RxNetworkRequest<T>
         private Class<T> responseClaasType;
         private RequestBody requestBody;
 
+
+
         MultipartBody.Part file;
         @RequestType
         String requestType;
@@ -148,10 +256,9 @@ public class RxNetworkRequest<T>
         private Map<String, String> headerParams = new HashMap<>();
 
 
-        public RxNetworkRequestBuilder(String endPoint, @ObservableType String observableType, @ResponseType String responseType,Class<T> responseClaasType) {
+        public RxNetworkRequestBuilder(String endPoint, @ObservableType String observableType,Class<T> responseClaasType) {
             this.endPoint = endPoint;
             this.observableType = observableType;
-            this.responseType = responseType;
             this.responseClaasType=responseClaasType;
         }
 
@@ -179,6 +286,15 @@ public class RxNetworkRequest<T>
             return this;
         }
 
+
+        public MultipartBody.Part getFile() {
+            return file;
+        }
+
+        public RxNetworkRequestBuilder setFile(MultipartBody.Part file) {
+            this.file = file;
+            return this;
+        }
         public RxNetworkRequestBuilder setResponseClaasType(Class<T> responseClaasType)
         {
             this.responseClaasType = responseClaasType;

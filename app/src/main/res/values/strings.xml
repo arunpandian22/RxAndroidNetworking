@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">AndoridRXNetworking</string>
+    <string name="app_name">Android RxNetworking</string>
+    <string name="featureRequest">Sample Request</string>
+    <string name="featureFileUpload">File Upload</string>
+    <string name="featureFileDownload">File Download</string>
+    <string name="title_activity_file_download">FileDownloadActivity</string>
 </resources>

@@ -38,18 +38,18 @@ public interface ApiInterfaceService<T>
 
     @Headers({"Accept: application/json"})
     @GET("{url}")
-    Flowable<T> getFlowableObject(@Path("url") String url, @QueryMap Map<String, Object> params);
+    Flowable<ResponseBody> getFlowableObject(@Path("url") String url, @QueryMap Map<String, Object> params);
 
     @Headers({"Accept: application/json"})
     @GET("{url}")
-    Maybe<T> getMaybeObject(@Path("url") String url, @QueryMap Map<String, Object> params);
+    Maybe<ResponseBody> getMaybeObject(@Path("url") String url, @QueryMap Map<String, Object> params);
 
     @Headers({"Accept: application/json"})
     @GET("{url}")
-    Observable<T> getObservable(@Path("url") String url, @QueryMap Map<String, Object> params);
+    Observable<ResponseBody> getObservable(@Path("url") String url, @QueryMap Map<String, Object> params);
 
 
-    // Get okhttp3 ResponseBody Object
+   /* // Get okhttp3 ResponseBody Object
 
     @Headers({"Accept: application/json"})
     @GET("{url}")
@@ -66,7 +66,7 @@ public interface ApiInterfaceService<T>
     @Headers({"Accept: application/json"})
     @GET("{url}")
     Observable<ResponseBody> getObservableResponseBody(@Path("url") String url, @QueryMap Map<String, Object> params);
-
+*/
 
     //Get Streaming bitmap
 
@@ -175,11 +175,11 @@ public interface ApiInterfaceService<T>
 
     @Headers({"Accept: application/json"})
     @POST("{url}")
-    Flowable<T> postFlowableObjectRequest(@Path("url") String url, @QueryMap Map<String, Object> params);
+    Flowable<ResponseBody> postFlowableObjectRequest(@Path("url") String url, @QueryMap Map<String, Object> params);
 
     @Headers({"Accept: application/json"})
     @POST("{url}")
-    Maybe<T> postMaybeObjectRequest(@Path("url") String url, @QueryMap Map<String, Object> params);
+    Maybe<ResponseBody> postMaybeObjectRequest(@Path("url") String url, @QueryMap Map<String, Object> params);
 
     @Headers({"Accept: application/json"})
     @POST("{url}")
@@ -197,11 +197,12 @@ public interface ApiInterfaceService<T>
 
     @Multipart
     @POST("{url}")
-    Single<T> postSingleMultipartObjectRequestquest(@Path("url") String url, @QueryMap Map<String, String> params, @Body RequestBody post, @Part MultipartBody.Part file);
+    Single<ResponseBody> postSingleMultipartObjectRequestquest(@Path("url") String url, @QueryMap Map<String, String> params, @Body RequestBody post, @Part MultipartBody.Part file);
 
 
     @Multipart
-    Flowable<T> postFlowableMultipartObjectRequest(@Path("url") String url, @Part MultipartBody.Part file);
+    @POST("{url}")
+    Flowable<ResponseBody> postFlowableMultipartObjectRequest(@Path("url") String url, @Part MultipartBody.Part file);
 
 
     @Multipart
@@ -211,12 +212,12 @@ public interface ApiInterfaceService<T>
 
     @Multipart
     @POST("{url}")
-    Flowable<T> postFlowableMultipartObjectRequest(@Path("url") String url, @QueryMap Map<String, String> params, @Body RequestBody post, @Part MultipartBody.Part file);
+    Flowable<ResponseBody> postFlowableMultipartObjectRequest(@Path("url") String url, @QueryMap Map<String, String> params, @Body RequestBody post, @Part MultipartBody.Part file);
 
 
     @Multipart
     @POST("{url}")
-    Maybe<T> postMaybeMultipartObjectRequest(@Path("url") String url, @Part MultipartBody.Part file);
+    Maybe<ResponseBody> postMaybeMultipartObjectRequest(@Path("url") String url, @Part MultipartBody.Part file);
 
     @Multipart
     @POST("{url}")
@@ -243,13 +244,13 @@ public interface ApiInterfaceService<T>
 
     // post request body
     @POST("{url}")
-    Single<T> postSingleObjectRequest(@Path("url") String url, @Body RequestBody post);
+    Single<ResponseBody> postSingleObjectRequest(@Path("url") String url, @Body RequestBody post);
 
     @POST("{url}")
-    Flowable<T> postflowableObjectRequest(@Path("url") String url, @Body RequestBody post);
+    Flowable<ResponseBody> postflowableObjectRequest(@Path("url") String url, @Body RequestBody post);
 
     @POST("{url}")
-    Maybe<T> postMaybeObjectRequest(@Path("url") String url, @Body RequestBody post);
+    Maybe<ResponseBody> postMaybeObjectRequest(@Path("url") String url, @Body RequestBody post);
 
     @POST("{url}")
     Observable<T> postObservableObjectRequest(@Path("url") String url, @Body RequestBody post);

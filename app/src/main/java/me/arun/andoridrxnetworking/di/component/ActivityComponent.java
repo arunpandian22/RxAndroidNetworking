@@ -15,13 +15,10 @@ import me.arun.androidrxnetworking.ProgressUtils;
 
 @ObjectScope
 @Component(dependencies = ApplicationComponent.class, modules = ActivityModule.class)
-public interface ActivityComponent {
-
+public interface ActivityComponent
+{
     void inject(MainActivity mainActivity);
-
     CompositeDisposable getCompisiteDisposable();
-
-
 
 
 }
