@@ -58,7 +58,7 @@ public class RxNetworkRequest<T>
             this.requestType=rxNetworkRequestBuilder.requestType;
         if (rxNetworkRequestBuilder.file!=null)
             this.multipartFile=rxNetworkRequestBuilder.file;
-        if (rxNetworkRequestBuilder.file!=null)
+        if (rxNetworkRequestBuilder.observableType!=null)
             this.observableType=rxNetworkRequestBuilder.observableType;
 
 
@@ -94,7 +94,7 @@ public class RxNetworkRequest<T>
 
         if (observableType == null)
             throw new IllegalArgumentException("observable type must not be null.");
-
+        Log.d(TAG, "makeRequest: "+requestType+ " "+observableType);
 
         switch (requestType)
         {
@@ -115,12 +115,15 @@ public class RxNetworkRequest<T>
             }
 
                 break;
+
             case RequestType.POST:
                 switch (observableType)
                 {
                     case ObservableType.SINGLE:
                         if (requestBody==null &&  multipartFile==null)
-                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleResponseBodyRequest(endPoint, queryParams),publishSubject,responseClassType);
+                        {
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleResponseBodyRequest(endPoint, queryParams), publishSubject, responseClassType);
+                        }
                         else if (requestBody==null)
                             rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleMultipartRequest(endPoint,multipartFile),publishSubject,responseClassType);
                         else if (multipartFile==null)
@@ -142,8 +145,10 @@ public class RxNetworkRequest<T>
 
                     case ObservableType.FLOWABLE:
 
-                        if (requestBody==null &&  multipartFile==null)
-                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.postFlowableObjectRequest(endPoint, queryParams),publishProcessor,responseClassType);
+                        if (requestBody==null &&  multipartFile==null) {
+                            Log.d(TAG, "makeRequest: call Post");
+                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.postFlowableObjectRequest(endPoint, queryParams), publishProcessor, responseClassType);
+                        }
                         else if (requestBody==null)
                             rxNetWorkApiCallHelper.callPost(apiInterfaceService.postFlowableMultipartRequest(endPoint,multipartFile),publishProcessor,responseClassType);
                         else if (multipartFile==null)
@@ -256,10 +261,11 @@ public class RxNetworkRequest<T>
         private Map<String, String> headerParams = new HashMap<>();
 
 
-        public RxNetworkRequestBuilder(String endPoint, @ObservableType String observableType,Class<T> responseClaasType) {
+        public RxNetworkRequestBuilder(String endPoint, @ObservableType String observableType,@RequestType String requestType,Class<T> responseClaasType) {
             this.endPoint = endPoint;
             this.observableType = observableType;
             this.responseClaasType=responseClaasType;
+            this.requestType=requestType;
         }
 
 

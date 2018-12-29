@@ -27,6 +27,7 @@ import me.arun.andoridrxnetworking.utils.FeatureCategory;
 import me.arun.andoridrxnetworking.utils.Imageutils;
 import me.arun.androidrxnetworking.NetworkingApiClient;
 import me.arun.androidrxnetworking.ObservableType;
+import me.arun.androidrxnetworking.RequestType;
 import me.arun.androidrxnetworking.ResponseType;
 import me.arun.androidrxnetworking.RxNetworkRequest;
 import okhttp3.ResponseBody;
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity  {
         retrofit = NetworkingApiClient.getRetrofitClient();
         Map<String, String> hmHearders = new HashMap<>();
         hmHearders.put("token", "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZkZUBuZm4iLCJuYW1lIjoiUmF0aGlzaCIsImV4cCI6MTU0ODM5MjcyOX0.-8NDqqVD9bSYle1gekL46N8xp42rdf1q1GV8wFu1Tt4");
-        RxNetworkRequest<ModelPatientSearch> rxNetworkRequest = new RxNetworkRequest.RxNetworkRequestBuilder("person_search", ObservableType.SINGLE, ModelPatientSearch.class).setHeaderParams(hmHearders).build();
+        RxNetworkRequest<ModelPatientSearch> rxNetworkRequest = new RxNetworkRequest.RxNetworkRequestBuilder("person_search", ObservableType.SINGLE,RequestType.POST, ModelPatientSearch.class).setHeaderParams(hmHearders).build();
         Log.d(TAG, "onCreate: " + retrofit);
         Map<String, String> hmParams = new HashMap<>();
         hmParams.put("search", "a");

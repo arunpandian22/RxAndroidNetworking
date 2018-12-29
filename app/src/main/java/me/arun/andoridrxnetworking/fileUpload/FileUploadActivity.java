@@ -26,6 +26,7 @@ import me.arun.andoridrxnetworking.resModel.UserImgUploadResponse;
 import me.arun.andoridrxnetworking.utils.Imageutils;
 import me.arun.androidrxnetworking.NetworkingApiClient;
 import me.arun.androidrxnetworking.ObservableType;
+import me.arun.androidrxnetworking.RequestType;
 import me.arun.androidrxnetworking.ResponseType;
 import me.arun.androidrxnetworking.RxNetworkRequest;
 import okhttp3.MediaType;
@@ -80,7 +81,7 @@ public class FileUploadActivity extends AppCompatActivity implements Imageutils.
 
             Map<String, String> hmHearders = new HashMap<>();
             hmHearders.put("token", "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZkZUBuZm4iLCJuYW1lIjoiUmF0aGlzaCIsImV4cCI6MTU0ODM5MjcyOX0.-8NDqqVD9bSYle1gekL46N8xp42rdf1q1GV8wFu1Tt4");
-            RxNetworkRequest<UserImgUploadResponse> rxNetworkRequest = new RxNetworkRequest.RxNetworkRequestBuilder("add_image", ObservableType.SINGLE, UserImgUploadResponse.class).setHeaderParams(hmHearders).setFile(body).build();
+            RxNetworkRequest<UserImgUploadResponse> rxNetworkRequest = new RxNetworkRequest.RxNetworkRequestBuilder("add_image", ObservableType.SINGLE,RequestType.POST, UserImgUploadResponse.class).setHeaderParams(hmHearders).setFile(body).build();
             rxNetworkRequest.makeImageUpload(sourceUplopad);
             ivUpload.setImageBitmap(file1);
 

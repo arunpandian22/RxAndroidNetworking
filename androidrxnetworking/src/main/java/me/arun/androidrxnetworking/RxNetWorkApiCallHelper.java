@@ -111,10 +111,14 @@ public class RxNetWorkApiCallHelper<T> {
                             Log.d(TAG, "accept: "+ gson.fromJson(json, responseType));
                             Log.i("Response", "test : " +res+ responseType.getName());
                             Log.d(TAG, "accept: "+publishSubject.hasSubscribers());
-                            if (res!=null)
+                            if (res!=null) {
                                 publishSubject.onNext(res);
-                            else
+                                Log.d(TAG, "accept: onNext "+res);
+                            }
+                            else {
                                 publishSubject.onError(new Throwable("null"));
+
+                            }
 
                         } catch (Exception e) {
                             e.printStackTrace();

@@ -39,7 +39,8 @@ public class NetworkingApiClient
      *
      * @param baseUrl a base url of the network call
      */
-    public static void setClient(String baseUrl) {
+    public static void setClient(String baseUrl)
+    {
 
         BASE_URL=baseUrl;
         client = getDefaultClient();
@@ -47,6 +48,7 @@ public class NetworkingApiClient
             retrofit = getRetrofitInstance(baseUrl, client);
         }
     }
+
 
 
 
@@ -107,7 +109,7 @@ public class NetworkingApiClient
         getRetrofitInstance(baseUrl, client);
     }
 
-    public void setBaseUrl(String baseUrl) {
+    public static void  setBaseUrl(String baseUrl) {
         BASE_URL = baseUrl;
     }
 

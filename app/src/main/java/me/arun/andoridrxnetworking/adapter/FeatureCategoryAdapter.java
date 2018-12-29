@@ -1,5 +1,4 @@
 package me.arun.andoridrxnetworking.adapter;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -11,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.arun.andoridrxnetworking.R;
@@ -41,7 +39,8 @@ public class FeatureCategoryAdapter extends RecyclerView.Adapter<FeatureCategory
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_req_category, parent, false);
         return new ViewHolder(view);
@@ -49,8 +48,8 @@ public class FeatureCategoryAdapter extends RecyclerView.Adapter<FeatureCategory
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        if (holder != null) {
-
+        if (holder != null)
+        {
             ModelFeatureCategory modelFeatureCategory = listModelFeatureList.get(position);
             int imageResource = activity.getResources().getIdentifier(modelFeatureCategory.getImageUri(), null, activity.getPackageName());
             Drawable iconDrwable = activity.getResources().getDrawable(imageResource);
@@ -59,9 +58,7 @@ public class FeatureCategoryAdapter extends RecyclerView.Adapter<FeatureCategory
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     reDirectActivity(modelFeatureCategory.getTitle());
-
                 }
             });
         }
@@ -110,7 +107,6 @@ public class FeatureCategoryAdapter extends RecyclerView.Adapter<FeatureCategory
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
-
 
     }
 

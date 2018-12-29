@@ -7,7 +7,8 @@ import android.app.Application;
  * arunsachin222@gmail.com
  * Chennai
  */
-public class RXNetworkingApplication extends Application {
+public class RXNetworkingApplication extends Application
+{
 
     @Override
     public void onCreate()
