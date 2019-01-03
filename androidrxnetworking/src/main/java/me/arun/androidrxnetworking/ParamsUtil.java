@@ -39,6 +39,17 @@ public class ParamsUtil
     }
 
 
+    public static RequestBody getGraphQlString(String query)
+    {
+        //QueryString.listQuery("1")
+       return RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),query);
+
+    }
+
+
+
+
+
 
 
 }

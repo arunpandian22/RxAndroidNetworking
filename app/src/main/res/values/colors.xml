@@ -8,4 +8,5 @@
     <color name="colorPrimaryHeaderText">#4F4F4F</color>
     <color name="colorIconBackground">#D2D4DB</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorBlack">#000000</color>
 </resources>

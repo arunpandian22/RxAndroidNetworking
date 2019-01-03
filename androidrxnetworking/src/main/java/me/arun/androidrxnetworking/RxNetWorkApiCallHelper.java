@@ -32,10 +32,13 @@ public class RxNetWorkApiCallHelper<T> {
 
         gson=new GsonBuilder().create();
         if (observable == null) {
+            ProgressDialogLoader.progressdialogDismiss();
+
             throw new IllegalArgumentException("Observable must not be null.");
         }
 
         if (publishSubject == null) {
+            ProgressDialogLoader.progressdialogDismiss();
             throw new IllegalArgumentException("Callback must not be null.");
         }
 
@@ -47,6 +50,7 @@ public class RxNetWorkApiCallHelper<T> {
                     public void accept(@NonNull ResponseBody responseBody) throws Exception
                     {
                         // success response
+                        ProgressDialogLoader.progressdialogDismiss();
                         String json = null;
                         try {
                             json = responseBody.string();
@@ -71,6 +75,8 @@ public class RxNetWorkApiCallHelper<T> {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception
                     {
+                        ProgressDialogLoader.progressdialogDismiss();
+
                         Log.d(TAG, "accept: error"+throwable.getMessage());
                         // failure response
                         if (throwable != null) {
@@ -102,6 +108,8 @@ public class RxNetWorkApiCallHelper<T> {
                     public void accept(@NonNull ResponseBody responseBody) throws Exception
                     {
                         // success response
+                        ProgressDialogLoader.progressdialogDismiss();
+
                         String json = null;
                         try {
                             json = responseBody.string();
@@ -122,6 +130,8 @@ public class RxNetWorkApiCallHelper<T> {
 
                         } catch (Exception e) {
                             e.printStackTrace();
+                            ProgressDialogLoader.progressdialogDismiss();
+
                             Log.d(TAG, "accept: "+e.getLocalizedMessage());
                         }
 
@@ -130,6 +140,8 @@ public class RxNetWorkApiCallHelper<T> {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception
                     {
+                        ProgressDialogLoader.progressdialogDismiss();
+
                         Log.d(TAG, "accept: error"+throwable.getMessage());
                         // failure response
                         if (throwable != null) {
@@ -163,6 +175,8 @@ public class RxNetWorkApiCallHelper<T> {
                     @Override
                     public void accept(@NonNull ResponseBody responseBody) throws Exception
                     {
+                        ProgressDialogLoader.progressdialogDismiss();
+
                         // success response
                         String json = null;
                         try {
@@ -189,6 +203,7 @@ public class RxNetWorkApiCallHelper<T> {
                     public void accept(@NonNull Throwable throwable) throws Exception
                     {
                         Log.d(TAG, "accept: error"+throwable.getMessage());
+                        ProgressDialogLoader.progressdialogDismiss();
                         // failure response
                         if (throwable != null) {
                             publishSubject.onError(throwable);

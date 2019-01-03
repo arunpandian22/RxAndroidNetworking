@@ -7,15 +7,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import me.arun.andoridrxnetworking.R;
-public class FileDownloadActivity extends AppCompatActivity {
 
+/**
+ * A activity test the FileDownload
+ */
+public class FileDownloadActivity extends AppCompatActivity
+{
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_download);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
     }
-
 }

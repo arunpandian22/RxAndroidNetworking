@@ -3,6 +3,9 @@ package me.arun.androidrxnetworking;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+
+
+
 /**
  * Created by Jaison on 18/08/16.
  */
@@ -14,7 +17,8 @@ public class ProgressDialogLoader
     Activity activity;
     boolean isNetworkCall;
 
-    public ProgressDialogLoader(Context context, boolean isNetworkCall) {
+    public ProgressDialogLoader(Context context, boolean isNetworkCall)
+    {
         this.context = context;
         this.activity= (Activity) context;
         this.isNetworkCall=isNetworkCall;
@@ -22,16 +26,18 @@ public class ProgressDialogLoader
 
     public static void progressdialogCreation(Activity activity,boolean isNetworkCall)
     {
+
         try {
            if(progressUtils==null)
            {
                progressUtils=new ProgressUtils(activity,isNetworkCall);
-               Log.d("dialog null","show");
+               Log.d("ProgressDialogLoader","dialog null: show");
                progressUtils.showDialog(false);
            }
         }
         catch(Exception e)
         {
+            Log.d("ProgressDialogLoader", "progressdialogCreation: ");
 
         }
     }

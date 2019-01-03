@@ -1,7 +1,6 @@
 package me.arun.andoridrxnetworking;
-import android.graphics.Bitmap;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -35,7 +34,7 @@ import retrofit2.Retrofit;
 public class MainActivity extends AppCompatActivity  {
     Retrofit retrofit;
     String TAG = "MainActivity";
-    PublishSubject<ModelPatientSearch> source = PublishSubject.create();
+    PublishSubject<ResponseBody> source = PublishSubject.create();
     PublishProcessor<ResponseBody> page = PublishProcessor.create();
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     List<ModelFeatureCategory> modelFeatureCategories = new ArrayList<>();
@@ -44,7 +43,6 @@ public class MainActivity extends AppCompatActivity  {
     FeatureCategoryAdapter featureCategoryAdapter;
     @BindView(R.id.rvFeatureCategory)
     RecyclerView rvFeatureCategory;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -53,7 +51,6 @@ public class MainActivity extends AppCompatActivity  {
         ButterKnife.bind(this);
         toolbarSetup();
         setFeatureCategoryList();
-
         NetworkingApiClient.setClient("https://dev.slashdr.com/v2/");
         featureCategoryAdapter = new FeatureCategoryAdapter(this, modelFeatureCategories);
         RecyclerView.LayoutManager layoutManager=new GridLayoutManager(this,2);
@@ -62,13 +59,13 @@ public class MainActivity extends AppCompatActivity  {
         retrofit = NetworkingApiClient.getRetrofitClient();
         Map<String, String> hmHearders = new HashMap<>();
         hmHearders.put("token", "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZkZUBuZm4iLCJuYW1lIjoiUmF0aGlzaCIsImV4cCI6MTU0ODM5MjcyOX0.-8NDqqVD9bSYle1gekL46N8xp42rdf1q1GV8wFu1Tt4");
-        RxNetworkRequest<ModelPatientSearch> rxNetworkRequest = new RxNetworkRequest.RxNetworkRequestBuilder("person_search", ObservableType.SINGLE,RequestType.POST, ModelPatientSearch.class).setHeaderParams(hmHearders).build();
+        RxNetworkRequest<ResponseBody> rxNetworkRequest = new RxNetworkRequest.RxNetworkRequestBuilder(this,"registration", ObservableType.SINGLE,RequestType.POST, ResponseBody.class).setHeaderParams(hmHearders).build();
         Log.d(TAG, "onCreate: " + retrofit);
         Map<String, String> hmParams = new HashMap<>();
         hmParams.put("search", "a");
         hmParams.put("page", "1");
         source();
-        rxNetworkRequest.makeSingleRequest(source, hmParams);
+        rxNetworkRequest.makeRequest(source, null,"");
 
 
 //        compositeDisposable.add(rxNetworkRequest.getImageFullUrl("Serial/Death%20Note/S01/Death.Note.S01E01.mkv").subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableSingleObserver<ResponseBody>(){
@@ -111,9 +108,10 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
+    @SuppressLint("CheckResult")
     public void source()
     {
-        source.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new Observer<ModelPatientSearch>() {
+        source.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new Observer<ResponseBody>() {
             @Override
             public void onSubscribe(Disposable d)
             {
@@ -122,7 +120,7 @@ public class MainActivity extends AppCompatActivity  {
             }
 
             @Override
-            public void onNext(ModelPatientSearch modelPatientSearch)
+            public void onNext(ResponseBody modelPatientSearch)
             {
                 Log.d(TAG, "onNext: " + modelPatientSearch);
             }
@@ -161,7 +159,8 @@ public class MainActivity extends AppCompatActivity  {
         compositeDisposable.dispose();
     }
 
-    public void toolbarSetup(){
+    public void toolbarSetup()
+    {
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorAbTitle));
         setActionBar(toolbar);
     }

@@ -1,4 +1,5 @@
 package me.arun.andoridrxnetworking.fileUpload;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -23,7 +24,9 @@ import io.reactivex.subjects.PublishSubject;
 import me.arun.andoridrxnetworking.R;
 import me.arun.andoridrxnetworking.resModel.ModelPatientSearch;
 import me.arun.andoridrxnetworking.resModel.UserImgUploadResponse;
+import me.arun.andoridrxnetworking.resModel.imageResponse.ImageResponse;
 import me.arun.andoridrxnetworking.utils.Imageutils;
+import me.arun.androidrxnetworking.Network_check;
 import me.arun.androidrxnetworking.NetworkingApiClient;
 import me.arun.androidrxnetworking.ObservableType;
 import me.arun.androidrxnetworking.RequestType;
@@ -32,14 +35,16 @@ import me.arun.androidrxnetworking.RxNetworkRequest;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-
 import static me.arun.andoridrxnetworking.utils.Imageutils.CAMERA_REQUEST_CODE;
 
+/**
+ * A method to test the
+ */
 public class FileUploadActivity extends AppCompatActivity implements Imageutils.ImageAttachmentListener {
     Imageutils imageutils;
     @BindView(R.id.ivUpload)
     ImageView ivUpload;
-    PublishSubject<UserImgUploadResponse> sourceUplopad = PublishSubject.create();
+    PublishSubject<ImageResponse> sourceUplopad = PublishSubject.create();
     CompositeDisposable compositeDisposable=new CompositeDisposable();
 
 
@@ -53,7 +58,7 @@ public class FileUploadActivity extends AppCompatActivity implements Imageutils.
         imageutils = new Imageutils(this, this);
         imageutils.setImageAttachment_callBack(this);
         source();
-        NetworkingApiClient.setClient("https://dev.slashdr.com/");
+        NetworkingApiClient.setClient("https://api.imgur.com/");
 
 
         ivUpload.setOnClickListener(new View.OnClickListener()
@@ -81,8 +86,13 @@ public class FileUploadActivity extends AppCompatActivity implements Imageutils.
 
             Map<String, String> hmHearders = new HashMap<>();
             hmHearders.put("token", "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZkZUBuZm4iLCJuYW1lIjoiUmF0aGlzaCIsImV4cCI6MTU0ODM5MjcyOX0.-8NDqqVD9bSYle1gekL46N8xp42rdf1q1GV8wFu1Tt4");
-            RxNetworkRequest<UserImgUploadResponse> rxNetworkRequest = new RxNetworkRequest.RxNetworkRequestBuilder("add_image", ObservableType.SINGLE,RequestType.POST, UserImgUploadResponse.class).setHeaderParams(hmHearders).setFile(body).build();
+            RxNetworkRequest<ImageResponse> rxNetworkRequest = new RxNetworkRequest.RxNetworkRequestBuilder(this,"/3/image", ObservableType.SINGLE,RequestType.POST, UserImgUploadResponse.class).setHeaderParams(hmHearders).setFile(body).build();
+            if (Network_check.isNetworkAvailable(this))
             rxNetworkRequest.makeImageUpload(sourceUplopad);
+            else
+            {
+                //show internet error
+            }
             ivUpload.setImageBitmap(file1);
 
         }
@@ -97,7 +107,8 @@ public class FileUploadActivity extends AppCompatActivity implements Imageutils.
             super.onActivityResult(requestCode, resultCode, data);
             imageutils.onActivityResult(requestCode, resultCode, data);
 
-            if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
+            if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK)
+            {
                 Log.d(TAG, "onActivityResult: " + CAMERA_REQUEST_CODE);
             } /*else if (requestCode == GALEERY_REQUEST_CODE && resultCode == RESULT_OK) {
                 Log.d(TAG, "onActivityResult: galery " + GALEERY_REQUEST_CODE);
@@ -113,9 +124,10 @@ public class FileUploadActivity extends AppCompatActivity implements Imageutils.
 
 
 
+    @SuppressLint("CheckResult")
     public void source()
     {
-        sourceUplopad.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new Observer<UserImgUploadResponse>() {
+        sourceUplopad.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new Observer<ImageResponse>() {
             @Override
             public void onSubscribe(Disposable d)
             {
@@ -124,9 +136,11 @@ public class FileUploadActivity extends AppCompatActivity implements Imageutils.
             }
 
             @Override
-            public void onNext(UserImgUploadResponse modelPatientSearch)
+            public void onNext(ImageResponse modelPatientSearch)
             {
-                Log.d(TAG, "onNext: " + modelPatientSearch.isStatus());
+                Log.d(TAG, "onNext: " + modelPatientSearch.status);
+                Log.d(TAG, "onNext: "+modelPatientSearch.data.link);
+                Log.d(TAG, "onNext: ");
             }
 
             @Override

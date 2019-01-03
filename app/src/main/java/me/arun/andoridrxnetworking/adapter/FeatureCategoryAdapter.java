@@ -47,7 +47,8 @@ public class FeatureCategoryAdapter extends RecyclerView.Adapter<FeatureCategory
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position)
+    {
         if (holder != null)
         {
             ModelFeatureCategory modelFeatureCategory = listModelFeatureList.get(position);
@@ -65,6 +66,10 @@ public class FeatureCategoryAdapter extends RecyclerView.Adapter<FeatureCategory
     }
 
 
+    /**
+     * A method to redirect the activity to selected Activity
+     * @param title
+     */
     public void reDirectActivity(@FeatureCategory String title)
     {
         switch (title) {
@@ -103,11 +108,11 @@ public class FeatureCategoryAdapter extends RecyclerView.Adapter<FeatureCategory
         @BindView(R.id.tvCateogryTitle)
         TextView tvCategoryTitle;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView)
+        {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
-
     }
 
 

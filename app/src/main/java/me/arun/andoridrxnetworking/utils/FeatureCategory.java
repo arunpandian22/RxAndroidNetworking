@@ -15,7 +15,8 @@ import static me.arun.andoridrxnetworking.utils.FeatureCategory.SAMPLE_REQUEST;
 
 @Retention(SOURCE)
 @StringDef({SAMPLE_REQUEST,FILE_UPLOAD,FILE_DOWNLOAD,GRAPH_QL})
-public @interface FeatureCategory {
+public @interface FeatureCategory
+{
     String SAMPLE_REQUEST="SampleRequest";
     String FILE_UPLOAD="FileUpload";
     String FILE_DOWNLOAD="FileDownload";

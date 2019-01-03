@@ -27,14 +27,14 @@ public class ProgressUtils {
 
     public void showDialog(boolean isCancelable) {
 
- /*       ProgressBarData progressBarData;
-        if (isNetworkCall)
-            progressBarData = NetworkClient.getProgressBarData();
-        else
-            progressBarData = ApiClient.getProgressBarData();
+        ProgressBarData progressBarData;
+//        if (isNetworkCall)
+            progressBarData = NetworkingApiClient.getProgressBarData();
+//        else
+//            progressBarData = ApiClient.getProgressBarData();
 
         progressBarData.setCancelable(isCancelable);
-        showDialog(progressBarData);*/
+        showDialog(progressBarData);
     }
 
     public void showDialog(ProgressBarData progressBarData) {
@@ -45,18 +45,19 @@ public class ProgressUtils {
         ProgressBar progressbar = progressDialog.findViewById(R.id.progressBar1);
         RelativeLayout rlBackground = progressDialog.findViewById(R.id.rlLoaderBackground);
         TextView tvProgressMessage = progressDialog.findViewById(R.id.tvProgressDesc);
-//        if (progressBarData == null)
-//        {
+        if (progressBarData == null)
+        {
 //            if (isNetworkCall)
-//                progressBarData = NetworkClient.getProgressBarData();
+                progressBarData = NetworkingApiClient.getProgressBarData();
 //            else
 //                progressBarData = ApiClient.getProgressBarData();
-//        }
+        }
 
         progressbar.getIndeterminateDrawable().setColorFilter(progressBarData.getProgressbarTintColor(), android.graphics.PorterDuff.Mode.SRC_IN);
         progressDialog.setCancelable(progressBarData.isCancelable);
 
-        if (!TextUtils.isEmpty(progressBarData.getProgressMessage())) {
+        if (!TextUtils.isEmpty(progressBarData.getProgressMessage()))
+        {
             tvProgressMessage.setVisibility(View.VISIBLE);
             tvProgressMessage.setText(progressBarData.getProgressMessage());
             tvProgressMessage.setTextColor(progressBarData.getProgressMessageColor());
@@ -67,13 +68,14 @@ public class ProgressUtils {
         }
 
         progressDialog.show();
+        Log.d("ProgressUtils", "showDialog: ");
+
     }
 
 
     public void dismissDialog() {
         if (progressDialog != null && progressDialog.isShowing())
             progressDialog.dismiss();
-
         Log.d("util", "dismiss dialog");
     }
 

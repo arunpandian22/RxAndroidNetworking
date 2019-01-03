@@ -1,5 +1,4 @@
 package me.arun.androidrxnetworking;
-
 import android.content.Context;
 import android.text.TextUtils;
 import com.google.gson.Gson;
@@ -17,7 +16,6 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-
 /**
  * Created by Arun Pandian M on 20/December/2018
  * arunsachin222@gmail.com
@@ -32,6 +30,7 @@ public class NetworkingApiClient
     private static Retrofit retrofit;
     public static final int MAX_CACHE_SIZE = 10 * 1024 * 1024;
     public static final String CACHE_DIR_NAME = "cache_an";
+    public static ProgressBarData progressBarData = new ProgressBarData();
 
 
     /**
@@ -70,14 +69,16 @@ public class NetworkingApiClient
         final OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(new Interceptor() {
             @Override
-            public Response intercept(Chain chain) throws IOException {
+            public Response intercept(Chain chain) throws IOException
+            {
                 Request original = chain.request();
 
                 // Request customization: add request headers
 
                 Request.Builder requestBuilder = original.newBuilder(); // <-- this is the important line
 
-                for (Map.Entry<String, String> pairs : headers.entrySet()) {
+                for (Map.Entry<String, String> pairs : headers.entrySet())
+                {
                     if (pairs.getValue() != null) {
                         requestBuilder.header(pairs.getKey(), pairs.getValue());
                     }
@@ -129,7 +130,8 @@ public class NetworkingApiClient
         return retrofit;
     }
 
-    public  static Retrofit getRetrofitForImage(String baseUrl){
+    public  static Retrofit getRetrofitForImage(String baseUrl)
+    {
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -194,5 +196,17 @@ public class NetworkingApiClient
                 .writeTimeout(60, TimeUnit.SECONDS)
                 .build();
     }
+
+
+    public static void setProgressBarData(ProgressBarData progressBarDataDefaultValue)
+    {
+        if (progressBarDataDefaultValue != null)
+            progressBarData = progressBarDataDefaultValue;
+    }
+
+    public static ProgressBarData getProgressBarData() {
+        return progressBarData;
+    }
+
 
 }

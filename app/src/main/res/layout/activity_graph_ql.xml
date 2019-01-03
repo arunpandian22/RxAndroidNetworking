@@ -1,9 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".graphQlRequest.GraphQlActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:src="@drawable/image_brazil"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBottom"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_25sdp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.9" />
+
+
+    <View
+        android:id="@+id/viewBottom"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
+
+    <TextView
+        android:id="@+id/tvCurrencyLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_7sdp"
+        android:text="Currency"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/_18sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/viewBottom"
+        app:layout_constraintEnd_toEndOf="@+id/viewBottom"
+        app:layout_constraintEnd_toStartOf="@+id/tvFollowingLabel"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@+id/viewBottom"
+        app:layout_constraintStart_toStartOf="@+id/viewBottom"
+        app:layout_constraintTop_toTopOf="@+id/viewBottom"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <TextView
+        android:id="@+id/tvFollowingLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Emoji"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/_18sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/viewBottom"
+        app:layout_constraintEnd_toEndOf="@+id/viewBottom"
+        app:layout_constraintEnd_toStartOf="@+id/tvLanguagesLabel"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="3"
+        app:layout_constraintStart_toEndOf="@+id/tvCurrencyLabel"
+        app:layout_constraintTop_toTopOf="@+id/viewBottom" />
+
+    <TextView
+        android:id="@+id/tvLanguagesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/_7sdp"
+        android:text="Languages"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/_18sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/viewBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@+id/tvFollowingLabel"
+        app:layout_constraintTop_toTopOf="@+id/viewBottom" />
+
+    <TextView
+        android:id="@+id/tvLanguages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/_18sdp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/viewBottom"
+        app:layout_constraintEnd_toEndOf="@+id/viewBottom"
+        app:layout_constraintEnd_toStartOf="@+id/tvCurrency"
+        app:layout_constraintHorizontal_bias="0.001"
+        app:layout_constraintStart_toEndOf="@+id/tvEmoji"
+        app:layout_constraintStart_toStartOf="@+id/tvLanguagesLabel"
+        app:layout_constraintTop_toBottomOf="@+id/tvCurrencyLabel"
+        app:layout_constraintVertical_bias="0.349" />
+
+    <TextView
+        android:id="@+id/tvCurrency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/_18sdp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/viewBottom"
+        app:layout_constraintEnd_toEndOf="@+id/viewBottom"
+        app:layout_constraintEnd_toStartOf="@+id/viewBottom"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@+id/tvLanguages"
+        app:layout_constraintStart_toStartOf="@+id/tvCurrencyLabel"
+        app:layout_constraintTop_toBottomOf="@+id/tvCurrencyLabel"
+        app:layout_constraintVertical_bias="0.337" />
+
+    <TextView
+        android:id="@+id/tvEmoji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/_18sdp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/viewBottom"
+        app:layout_constraintEnd_toEndOf="@+id/viewBottom"
+        app:layout_constraintEnd_toStartOf="@+id/tvLanguages"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/viewBottom"
+        app:layout_constraintStart_toStartOf="@+id/tvFollowingLabel"
+        app:layout_constraintTop_toBottomOf="@+id/tvFollowingLabel"
+        app:layout_constraintVertical_bias="0.337" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.65" />
 </android.support.constraint.ConstraintLayout>

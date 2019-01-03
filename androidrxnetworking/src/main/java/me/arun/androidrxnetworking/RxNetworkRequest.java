@@ -1,6 +1,8 @@
 package me.arun.androidrxnetworking;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
+import android.text.TextUtils;
 import android.util.Log;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +21,7 @@ import retrofit2.Retrofit;
  * Created by Arun Pandian M on 22/December/2018
  * arunsachin222@gmail.com
  * Chennai
+ * a class to create the network request
  */
 public class RxNetworkRequest<T>
 {
@@ -38,6 +41,7 @@ public class RxNetworkRequest<T>
     Retrofit retrofit;
     MultipartBody.Part multipartFile;
     String TAG="RxNetworkRequest";
+    Activity activity;
 
     private RxNetworkRequest(RxNetworkRequestBuilder rxNetworkRequestBuilder)
     {
@@ -67,6 +71,9 @@ public class RxNetworkRequest<T>
     }
 
 
+    /**
+     * A method to initialize the interface call
+     */
     public void buildApiInterfaceService()
     {
         retrofit = NetworkingApiClient.getRetrofitWithHeaders(headerParams);
@@ -74,6 +81,11 @@ public class RxNetworkRequest<T>
     }
 
 
+    /**
+     *  a method to test the make request for the  the file download
+     * @param url
+     * @return
+     */
     public Single<ResponseBody> getImageFullUrl(String url)
     {
         Retrofit retrofitImage  = NetworkingApiClient.getRetrofitClient();
@@ -83,9 +95,22 @@ public class RxNetworkRequest<T>
     }
 
 
+    /**
+     * a method to make request for the network call
+     * @param publishSubject a instance of the PublishSubject
+     * @param publishProcessor a instance of the PublishProcessor
+     */
 
-    public void makeRequest(PublishSubject<T> publishSubject,PublishProcessor<T> publishProcessor)
+    public void makeRequest(PublishSubject<T> publishSubject,PublishProcessor<T> publishProcessor,String message)
     {
+        Log.d(TAG, "makeRequest: "+retrofit.baseUrl());
+        if(TextUtils.isEmpty(message)) {
+            ProgressDialogLoader.progressdialogCreation(this.activity,true);
+        } else {
+            ProgressBarData progressBarData=new ProgressBarData.ProgressBarBuilder().setProgressMessage(message).build();
+            ProgressDialogLoader.progressdialogCreation(this.activity, progressBarData,true);
+        }
+
         RxNetWorkApiCallHelper<T> rxNetWorkApiCallHelper=new RxNetWorkApiCallHelper();
 
         if (requestType == null)
@@ -167,64 +192,30 @@ public class RxNetworkRequest<T>
 
             case RequestType.DELETE:
                 break;
-
         }
-
-    }
-
-
-    public Single<T> makeSingleRequest()
-    {
-
-        switch (requestType)
-        {
-            case RequestType.GET:
-                return apiInterfaceService.getSingleObject(endPoint, queryParams);
-
-            case RequestType.POST:
-                if (requestBody==null &&  multipartFile==null)
-                    return apiInterfaceService.postSingleObjectRequest(endPoint, queryParams);
-                else if (requestBody==null)
-                    return apiInterfaceService.postSingleMultipartObjectRequest(endPoint, queryParams,multipartFile);
-                else if (multipartFile==null)
-                    return apiInterfaceService.postSingleObjectRequest(endPoint,requestBody);
-                else
-                    return apiInterfaceService.postSingleMultipartObjectRequestquest(endPoint,queryParams,requestBody,multipartFile);
-
-
-            case RequestType.PUT:
-            case RequestType.DELETE:
-
-        }
-
-        return apiInterfaceService.getSingleObject(endPoint, queryParams);
-    }
-
-
-    public void makeFlowbleRequest()
-    {
-
 
     }
 
 
     /**
-     * test request
+     * A method to make graphQlRequest
      * @param publishSubject
-     * @param queryParam
+     * @param publishProcessor
+     * @param message
      */
-    public void makeSingleRequest(PublishSubject<T> publishSubject,Map<String,String> queryParam)
+    public void makeGraphqlRequest(PublishSubject<T> publishSubject,PublishProcessor<T> publishProcessor,String message)
     {
-       RxNetWorkApiCallHelper<T> rxNetWorkApiCallHelper=new RxNetWorkApiCallHelper();
-        rxNetWorkApiCallHelper.call(apiInterfaceService.getSingleObject(endPoint,queryParam),publishSubject,responseClassType);
+        requestType=RequestType.POST;
+        makeRequest(publishSubject,publishProcessor,message);
     }
+
 
     /**
      * test imageupload
      * @return
      */
 
-    public void makeImageUpload(PublishSubject<T> publishSubject){
+    public void makeImageUpload(PublishSubject<T> publishSubject) {
         RxNetWorkApiCallHelper<T> rxNetWorkApiCallHelper=new RxNetWorkApiCallHelper();
         rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleMultipartRequest(endPoint,multipartFile),publishSubject,responseClassType);
     }
@@ -259,17 +250,20 @@ public class RxNetworkRequest<T>
         private Map<String, String> queryParams = new HashMap<>();
         private Map<String, String> fieldsParams = new HashMap<>();
         private Map<String, String> headerParams = new HashMap<>();
+        Activity activity;
 
 
-        public RxNetworkRequestBuilder(String endPoint, @ObservableType String observableType,@RequestType String requestType,Class<T> responseClaasType) {
+        public RxNetworkRequestBuilder(Activity activity,String endPoint, @ObservableType String observableType, @RequestType String requestType, Class<T> responseClaasType) {
             this.endPoint = endPoint;
             this.observableType = observableType;
             this.responseClaasType=responseClaasType;
             this.requestType=requestType;
+            this.activity=activity;
         }
 
 
-        public RxNetworkRequestBuilder setEndPoint(String endPoint) {
+        public RxNetworkRequestBuilder setEndPoint(String endPoint)
+        {
             this.endPoint = endPoint;
             return this;
         }

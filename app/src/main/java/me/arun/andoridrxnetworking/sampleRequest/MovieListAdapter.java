@@ -120,6 +120,11 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
         notifyDataSetChanged();
     }
 
+    public void addMovies(List<Result> moviesList){
+        this.moviesList.addAll(moviesList);
+        notifyDataSetChanged();
+    }
+
     /**
      * A viewHolder class for Image items
      */
