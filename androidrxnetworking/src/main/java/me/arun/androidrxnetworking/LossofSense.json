@@ -1,0 +1,224 @@
+{
+  "category_id": 3,
+  "tag_id": 31,
+  "speciality_id": 2,
+  "clinic_id": 14,
+  "doctor_id": 14,
+  "question": [
+    {
+      "name": "Do you have numbness?",
+      "summary_name": null,
+      "question_type_id": 9,
+      "options": [
+        {
+          "name": "Yes",
+          "summary_name": null
+        },
+        {
+          "name": "No",
+          "summary_name": null
+        }
+      ]
+    },
+    {
+      "name": "Duration",
+      "summary_name": null,
+      "question_type_id": 7,
+      "options": [  ]
+    },
+
+    {
+      "name": "Nature / Character:  ",
+      "summary_name": null,
+      "question_type_id": 4,
+      "options": [
+        {
+          "name": "burning pain",
+          "summary_name": null
+        },
+        {
+          "name": "Lancinating pain",
+          "summary_name": null
+        },
+        {
+          "name": "tingling ",
+          "summary_name": null
+        }
+      ,
+        {
+          "name": "numbness :",
+          "summary_name": null
+        }
+      ,
+        {
+          "name": "Cotton wool sensation :",
+          "summary_name": null
+        }
+      ,
+        {
+          "name": "Pins and Needles sensation ",
+          "summary_name": null
+        }
+
+
+      ]
+    }
+  ,
+    {
+      "name": "Progression. ",
+      "summary_name": null,
+      "question_type_id": 4,
+      "options": [
+        {
+          "name": "Progressive",
+          "summary_name": null
+        },
+        {
+          "name": "Non-progressive",
+          "summary_name": null
+        }
+      ]
+    },
+    {
+      "name": "Onset.. : ",
+      "summary_name": null,
+      "question_type_id": 4,
+      "options": [
+        {
+          "name": "Sudden (acute) onset",
+          "summary_name": null
+        },
+        {
+          "name": "Gradual (chronic) onset",
+          "summary_name": null
+        }
+      ]
+    },
+
+    {
+      "name": "Associated Symptoms: ( neuropathy assessment )  ",
+      "summary_name": null,
+      "question_type_id": 4,
+      "options": [
+        {
+          "name": "wash basin symptom",
+          "summary_name": null
+        },
+        {
+          "name": "slippage of chappals knowingly",
+          "summary_name": null
+        },
+        {
+          "name": "slippage of chappals without knowing",
+          "summary_name": null
+        }
+      ,
+        {
+          "name": "tripping of toes",
+          "summary_name": null
+        }
+      ,
+        {
+          "name": "buckling of knees",
+          "summary_name": null
+        }
+
+      ,
+        {
+          "name": "difficulty in getting up",
+          "summary_name": null
+        }
+      ,
+        {
+          "name": "trunk weakness",
+          "summary_name": null
+        }
+      ,
+        {
+          "name": " neck weakness",
+          "summary_name": null
+        }
+      ,
+        {
+          "name": "difficulty in mixing food",
+          "summary_name": null
+        }
+      ,
+        {
+          "name": "difficulty in gripping objects",
+          "summary_name": null
+        } ,
+        {
+          "name": "difficulty in buttoning shirt",
+          "summary_name": null
+        } ,
+        {
+          "name": " difficulty in reaching objects overhead",
+          "summary_name": null
+        } ,
+        {
+          "name": "thinning",
+          "summary_name": null
+        }
+      ,
+        {
+          "name": "stiffness of limbs",
+          "summary_name": null
+        }
+      ,
+        {
+          "name": "flailness of limbs",
+          "summary_name": null
+        },
+        ,
+        {
+          "name": " increased sweating",
+          "summary_name": null
+        },
+        {
+          "name": "abdominal fullness",
+          "summary_name": null
+        },
+        {
+          "name": "bloating",
+          "summary_name": null
+        },
+        {
+          "name": "early satiety",
+          "summary_name": null
+        },
+        {
+          "name": "alternating constipation and diarrhoea",
+          "summary_name": null
+        },
+        {
+          "name": "Loss of libido",
+          "summary_name": null
+        }
+      ]
+    },
+    {
+      "name": "Postural variations",
+      "summary_name": null,
+      "question_type_id": 1,
+      "options": [  ]
+
+    },
+    {
+      "name": "Aggravating factors",
+      "summary_name": null,
+      "question_type_id": 1,
+      "options": [  ]
+
+    },
+    {
+      "name": " Relieving factors",
+      "summary_name": null,
+      "question_type_id": 1,
+      "options": [  ]
+
+    }
+  ]
+
+}
+

@@ -100,7 +100,8 @@ public class FileUploadActivity extends AppCompatActivity implements Imageutils.
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(TAG, "onActivityResult: reqcode+resltcode"+requestCode+""+resultCode);
         try {

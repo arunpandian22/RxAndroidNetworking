@@ -1,0 +1,463 @@
+{
+  "category_id": 9,
+  "tag_id": 31,
+  "speciality_id": 2,
+  "clinic_id": 14,
+  "doctor_id": 14,
+  "question": [
+    {
+      "name": "Do you have difficulty in movement ",
+      "summary_name": null,
+      "question_type_id": 9,
+      "options": [
+        {
+          "name": "Yes",
+          "summary_name": null
+        },
+        {
+          "name": "No",
+          "summary_name": null
+        }
+      ]
+    },
+    {
+      "name": "Duration",
+      "summary_name": null,
+      "question_type_id": 7,
+      "options": [
+        {
+          "name": "Minutes",
+          "summary_name": null
+        },
+        {
+          "name": "Hours",
+          "summary_name": null
+        },
+        {
+          "name": "Days",
+          "summary_name": null
+        },
+        {
+          "name": "Weeks",
+          "summary_name": null
+        },
+        {
+          "name": "Months",
+          "summary_name": null
+        },
+        {
+          "name": "Years",
+          "summary_name": null
+        }
+      ]
+    },
+    {
+      "name": "Nature / Character",
+      "summary_name": null,
+      "question_type_id": 5,
+      "options": [
+        {
+          "name": "Decreased movement",
+          "summary_name": null
+        },
+        {
+          "name": "Increased movement ",
+          "summary_name": null
+        },
+        {
+          "name": "Gait",
+          "summary_name": null
+        },
+        {
+          "name": "Tremors",
+          "summary_name": null
+        },
+        {
+          "name": "Fasiculations",
+          "summary_name": null
+        },
+        {
+          "name": "Weakness",
+          "summary_name": null
+        }
+      ],
+      "sub_question": [
+        {
+          "name": "What kind of Decreased movement?",
+          "summary_name": null,
+          "question_type_id": 5,
+          "answer_state": "Decreased movement",
+          "options": [
+            {
+              "name": "Slowness of movement ",
+              "summary_name": null
+            },
+            {
+              "name": "Decreased arm swing",
+              "summary_name": null
+            },
+            {
+              "name": "stiffness of limbs",
+              "summary_name": null
+            }
+          ]
+        },
+        {
+          "name": "What kind of Increased movement",
+          "summary_name": null,
+          "question_type_id": 5,
+          "answer_state": "Increased movement",
+          "options": [
+            {
+              "name": "Distal , Symmetrical",
+              "summary_name": null
+            },
+            {
+              "name": "Distal , Assymmetrical",
+              "summary_name": null
+            },
+            {
+              "name": "Proximal , Symmetrical",
+              "summary_name": null
+            },
+            {
+              "name": "Proximal , Assymmetrical",
+              "summary_name": null
+            }
+          ]
+        },
+        {
+          "name": "How?",
+          "summary_name": null,
+          "question_type_id": 5,
+          "answer_state": "Gait",
+          "options": [
+            {
+              "name": "Walking with short steps",
+              "summary_name": null
+            },
+            {
+              "name": "Redness",
+              "summary_name": null
+            },
+            {
+              "name": "Swaying Tendency",
+              "summary_name": null
+            },
+            {
+              "name": "Recurrent fall",
+              "summary_name": null
+            }
+          ]
+        },
+        {
+          "name": "What kind of tremors?",
+          "summary_name": null,
+          "question_type_id": 5,
+          "answer_state": "Tremors",
+          "options": [
+            {
+              "name": "hands",
+              "summary_name": null
+            },
+            {
+              "name": "limbs",
+              "summary_name": null
+            },
+            {
+              "name": "voice",
+              "summary_name": null
+            },
+            {
+              "name": "at rest",
+              "summary_name": null
+            },
+            {
+              "name": "at action",
+              "summary_name": null
+            },
+            {
+              "name": "postural",
+              "summary_name": null
+            },
+            {
+              "name": "intentional",
+              "summary_name": null
+            }
+          ]
+        },
+        {
+          "name": "What kind of Fasiculations?",
+          "summary_name": null,
+          "question_type_id": 5,
+          "answer_state": "Fasiculations",
+          "options": [
+            {
+              "name": "generalised",
+              "summary_name": null
+            },
+            {
+              "name": "localised",
+              "summary_name": null
+            }
+          ]
+        },
+        {
+          "name": "What kind of Weakness?",
+          "summary_name": null,
+          "question_type_id": 5,
+          "answer_state": "Weakness",
+          "options": [
+            {
+              "name": "generalised",
+              "summary_name": null
+            },
+            {
+              "name": "localised",
+              "summary_name": null
+            },
+            {
+              "name": "progression of weakness",
+              "summary_name": null
+            }
+          ],
+          "sub_question": [
+            {
+              "name": "Where",
+              "summary_name": null,
+              "question_type_id": 4,
+              "answer_state": "localised",
+              "options": [
+                {
+                  "name": "unilateral",
+                  "summary_name": null
+                },
+                {
+                  "name": "bilateral",
+                  "summary_name": null
+                },
+                {
+                  "name": "None particularly",
+                  "summary_name": null
+                }
+              ]
+            },{
+              "name": "How",
+              "summary_name": null,
+              "question_type_id": 4,
+              "answer_state": "progression of weakness",
+              "options": [
+                {
+                  "name": "distal to proximal",
+                  "summary_name": null
+                },
+                {
+                  "name": "proximal to distal",
+                  "summary_name": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Associated Symptoms",
+          "summary_name": null,
+          "question_type_id": 5,
+          "options": [
+            {
+              "name": "Shoulder pain",
+              "summary_name": null
+            },
+            {
+              "name": "Back pain ",
+              "summary_name": null
+            },
+            {
+              "name": "Drooling of saliva",
+              "summary_name": null
+            },
+            {
+              "name": "Worsening of handwriting ",
+              "summary_name": null
+            },
+            {
+              "name": "Recurrent fall",
+              "summary_name": null
+            },
+            {
+              "name": "Dizziness on standing up ",
+              "summary_name": null
+            },
+            {
+              "name": "Increased sweating",
+              "summary_name": null
+            },
+            {
+              "name": "Disturbed bladder habits",
+              "summary_name": null
+            },
+            {
+              "name": "Disturbed bowel habits",
+              "summary_name": null
+            }
+          ]
+        },
+        {
+          "name": "Onset",
+          "summary_name": null,
+          "question_type_id": 4,
+          "options": [
+            {
+              "name": "Acute",
+              "summary_name": null
+            },
+            {
+              "name": "Chronic",
+              "summary_name": null
+            }
+          ]
+        },
+        {
+          "name": "Frequency",
+          "summary_name": null,
+          "question_type_id": 4,
+          "options": [
+            {
+              "name": "Continuous",
+              "summary_name": null
+            },
+            {
+              "name": "Intermittent",
+              "summary_name": null
+            }
+          ]
+        },
+        {
+          "name": "Progression",
+          "summary_name": null,
+          "question_type_id": 4,
+          "options": [
+            {
+              "name": "Progressive",
+              "summary_name": null
+            },
+            {
+              "name": "Non - Progressive",
+              "summary_name": null
+            }
+          ]
+        },
+        {
+          "name": "Is there a diurnal variation?",
+          "summary_name": null,
+          "question_type_id": 9,
+          "options": [
+            {
+              "name": "Yes",
+              "summary_name": null
+            },
+            {
+              "name": "No",
+              "summary_name": "No diurnal variation"
+            }
+          ],
+          "sub_question": [
+            {
+              "name": "If Y, then More during ",
+              "summary_name": null,
+              "question_type_id": 5,
+              "answer_state": "Yes",
+              "options": [
+                {
+                  "name": "a",
+                  "summary_name": null
+                },
+                {
+                  "name": "rest",
+                  "summary_name": null
+                },
+                {
+                  "name": "medication",
+                  "summary_name": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Severity",
+          "summary_name": null,
+          "question_type_id": 4,
+          "options": [
+            {
+              "name": "Mild",
+              "summary_name": null
+            },
+            {
+              "name": "Moderate",
+              "summary_name": null
+            },
+            {
+              "name": "Severe",
+              "summary_name": null
+            }
+          ]
+        },
+        {
+          "name": "Aggravating factors",
+          "summary_name": null,
+          "question_type_id": 5,
+          "options": [
+            {
+              "name": "a",
+              "summary_name": null
+            },
+            {
+              "name": "b",
+              "summary_name": null
+            },
+            {
+              "name": "c",
+              "summary_name": null
+            }
+          ]
+        },
+        {
+          "name": "Are there any relieving factors? ",
+          "summary_name": null,
+          "question_type_id": 9,
+          "options": [
+            {
+              "name": "Yes",
+              "summary_name": null
+            },
+            {
+              "name": "No",
+              "summary_name": "No relieving factors"
+            }
+          ],
+          "sub_question": [
+            {
+              "name": "i. If Y, then, Which of the following helps?",
+              "summary_name": null,
+              "question_type_id": 5,
+              "answer_state": "Yes",
+              "options": [
+                {
+                  "name": "a",
+                  "summary_name": null
+                },
+                {
+                  "name": "rest",
+                  "summary_name": null
+                },
+                {
+                  "name": "medication",
+                  "summary_name": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
