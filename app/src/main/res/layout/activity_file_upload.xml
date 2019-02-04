@@ -64,7 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scaleType="fitXY"
-        android:src="@drawable/Group"
+        android:src="@drawable/group"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
 

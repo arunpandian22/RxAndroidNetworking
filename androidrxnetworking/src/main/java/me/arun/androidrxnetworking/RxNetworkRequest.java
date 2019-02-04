@@ -1,11 +1,12 @@
 package me.arun.androidrxnetworking;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
@@ -45,12 +46,10 @@ public class RxNetworkRequest<T>
 
     private RxNetworkRequest(RxNetworkRequestBuilder rxNetworkRequestBuilder)
     {
-
         this.endPoint = rxNetworkRequestBuilder.endPoint;
         if (rxNetworkRequestBuilder.responseClaasType!=null)
         this.responseClassType = rxNetworkRequestBuilder.responseClaasType;
         else
-
         this.responseType = rxNetworkRequestBuilder.responseType;
         if (rxNetworkRequestBuilder.queryParams != null && !rxNetworkRequestBuilder.queryParams.isEmpty())
             this.queryParams = rxNetworkRequestBuilder.queryParams;
@@ -62,9 +61,8 @@ public class RxNetworkRequest<T>
             this.requestType=rxNetworkRequestBuilder.requestType;
         if (rxNetworkRequestBuilder.file!=null)
             this.multipartFile=rxNetworkRequestBuilder.file;
-        if (rxNetworkRequestBuilder.observableType!=null)
-            this.observableType=rxNetworkRequestBuilder.observableType;
-
+        if (rxNetworkRequestBuilder.observableType != null)
+            this.observableType = rxNetworkRequestBuilder.observableType;
 
         buildApiInterfaceService();
         Log.d(TAG, "RxNetworkRequest: retrofit"+NetworkingApiClient.getRetrofitClient());
@@ -74,41 +72,40 @@ public class RxNetworkRequest<T>
     /**
      * A method to initialize the interface call
      */
-    public void buildApiInterfaceService()
-    {
+    public void buildApiInterfaceService() {
         retrofit = NetworkingApiClient.getRetrofitWithHeaders(headerParams);
         apiInterfaceService = retrofit.create(ApiInterfaceService.class);
     }
 
 
     /**
-     *  a method to test the make request for the  the file download
+     * a method to test the make request for the  the file download
+     *
      * @param url
      * @return
      */
-    public Single<ResponseBody> getImageFullUrl(String url)
-    {
+    public Single<ResponseBody> getImageFullUrl(String url) {
         Retrofit retrofitImage  = NetworkingApiClient.getRetrofitClient();
         apiInterfaceService = retrofitImage.create(ApiInterfaceService.class);
-     return   apiInterfaceService.getImageSinglePublicRequest(url);
-
+        return apiInterfaceService.getImageSinglePublicRequest(url);
     }
 
 
     /**
      * a method to make request for the network call
-     * @param publishSubject a instance of the PublishSubject
+     *
+     * @param publishSubject   a instance of the PublishSubject
      * @param publishProcessor a instance of the PublishProcessor
      */
 
-    public void makeRequest(PublishSubject<T> publishSubject,PublishProcessor<T> publishProcessor,String message)
-    {
-        Log.d(TAG, "makeRequest: "+retrofit.baseUrl());
-        if(TextUtils.isEmpty(message)) {
-            ProgressDialogLoader.progressdialogCreation(this.activity,true);
+    public void makeRequest(PublishSubject<T> publishSubject, PublishProcessor<T> publishProcessor, String message) {
+        Log.d(TAG, "makeRequest: " + retrofit.baseUrl());
+        Log.d(TAG, "makeRequest: " + queryParams.size());
+        if (TextUtils.isEmpty(message)) {
+            ProgressDialogLoader.progressdialogCreation(this.activity, true);
         } else {
-            ProgressBarData progressBarData=new ProgressBarData.ProgressBarBuilder().setProgressMessage(message).build();
-            ProgressDialogLoader.progressdialogCreation(this.activity, progressBarData,true);
+            ProgressBarData progressBarData = new ProgressBarData.ProgressBarBuilder().setProgressMessage(message).build();
+            ProgressDialogLoader.progressdialogCreation(this.activity, progressBarData, true);
         }
 
         RxNetWorkApiCallHelper<T> rxNetWorkApiCallHelper=new RxNetWorkApiCallHelper();
@@ -119,67 +116,67 @@ public class RxNetworkRequest<T>
 
         if (observableType == null)
             throw new IllegalArgumentException("observable type must not be null.");
-        Log.d(TAG, "makeRequest: "+requestType+ " "+observableType);
+        Log.d(TAG, "makeRequest: " + requestType + " " + observableType);
 
-        switch (requestType)
-        {
-            case RequestType.GET:
-                {
-                    switch (observableType)
-                    {
-                        case ObservableType.SINGLE:
-                        rxNetWorkApiCallHelper.call(apiInterfaceService.getSingleObject(endPoint,queryParams),publishSubject,responseClassType);
-                         break;
-                        case ObservableType.MAYBE:
-                            break;
-                        case ObservableType.FLOWABLE:
-                            break;
-                        case ObservableType.COMPLETABLE:
-
-                    }
-            }
-
-                break;
-
-            case RequestType.POST:
-                switch (observableType)
-                {
+        switch (requestType) {
+            case RequestType.GET: {
+                switch (observableType) {
                     case ObservableType.SINGLE:
-                        if (requestBody==null &&  multipartFile==null)
-                        {
-                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleResponseBodyRequest(endPoint, queryParams), publishSubject, responseClassType);
-                        }
-                        else if (requestBody==null)
-                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleMultipartRequest(endPoint,multipartFile),publishSubject,responseClassType);
-                        else if (multipartFile==null)
-                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleObjectRequest(endPoint,requestBody),publishSubject,responseClassType);
-                        else
-                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleMultipartObjectRequestquest(endPoint,queryParams,requestBody,multipartFile),publishSubject,responseClassType);
+                        Log.d(TAG, "makeRequest endpoint: " + endPoint);
+                        rxNetWorkApiCallHelper.call(apiInterfaceService.getSingleObject(endPoint, queryParams), publishSubject, responseClassType);
                         break;
                     case ObservableType.MAYBE:
-                        if (requestBody==null &&  multipartFile==null)
-                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeObjectRequest(endPoint, queryParams),publishSubject,responseClassType);
-                        else if (requestBody==null)
-                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeMultipartRequest(endPoint,multipartFile),publishSubject,responseClassType);
-                        else if (multipartFile==null)
-                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeObjectRequest(endPoint,requestBody),publishSubject,responseClassType);
+                        break;
+                    case ObservableType.FLOWABLE:
+                        rxNetWorkApiCallHelper.callFlowable(apiInterfaceService.getFlowableObject(endPoint, queryParams), publishProcessor, responseClassType);
+                        break;
+                    case ObservableType.COMPLETABLE:
+                }
+            }
+
+            break;
+
+            case RequestType.POST:
+                switch (observableType) {
+                    case ObservableType.SINGLE:
+                        if (requestBody == null && multipartFile == null) {
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleResponseBodyRequest(endPoint, queryParams), publishSubject, responseClassType);
+                        } else if (requestBody == null) {
+                            Log.d(TAG, "makeRequest endpoint: " + endPoint);
+                            Log.d(TAG, "makeRequest: requestbody");
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleMultipartRequest(endPoint, multipartFile), publishSubject, responseClassType);
+                        } else if (multipartFile == null) {
+                            Log.d(TAG, "makeRequest: " + retrofit.baseUrl());
+                            Log.d(TAG, "makeRequest endpoint: multiport " + endPoint + requestBody.contentType());
+                            Log.d(TAG, "makeRequest: " + responseClassType.getCanonicalName());
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleObjectRequest(endPoint, requestBody), publishSubject, responseClassType);
+//                            rxNetWorkApiCallHelper.call(apiInterfaceService.makeRegistrationApiCall("eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZkZUBuZm4iLCJuYW1lIjoiUmF0aGlzaCIsImV4cCI6MTU0ODkxNzgxNn0.ndfmJI7c0twM9DnUZWQiKN-ZVCY_lvzWsyKgF6m9nEo", requestBody), publishSubject, responseClassType);
+                        } else
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleMultipartObjectRequestquest(endPoint, queryParams, requestBody, multipartFile), publishSubject, responseClassType);
+                        break;
+                    case ObservableType.MAYBE:
+                        if (requestBody == null && multipartFile == null)
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeObjectRequest(endPoint, queryParams), publishSubject, responseClassType);
+                        else if (requestBody == null)
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeMultipartRequest(endPoint, multipartFile), publishSubject, responseClassType);
+                        else if (multipartFile == null)
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeObjectRequest(endPoint, requestBody), publishSubject, responseClassType);
                         else
-                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeMultipartObjectRequest(endPoint,queryParams,requestBody,multipartFile),publishSubject,responseClassType);
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeMultipartObjectRequest(endPoint, queryParams, requestBody, multipartFile), publishSubject, responseClassType);
                         break;
 
 
                     case ObservableType.FLOWABLE:
 
-                        if (requestBody==null &&  multipartFile==null) {
+                        if (requestBody == null && multipartFile == null) {
                             Log.d(TAG, "makeRequest: call Post");
                             rxNetWorkApiCallHelper.callPost(apiInterfaceService.postFlowableObjectRequest(endPoint, queryParams), publishProcessor, responseClassType);
-                        }
-                        else if (requestBody==null)
-                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.postFlowableMultipartRequest(endPoint,multipartFile),publishProcessor,responseClassType);
-                        else if (multipartFile==null)
-                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.postflowableObjectRequest(endPoint,requestBody),publishProcessor,responseClassType);
+                        } else if (requestBody == null)
+                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.postFlowableMultipartRequest(endPoint, multipartFile), publishProcessor, responseClassType);
+                        else if (multipartFile == null)
+                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.postflowableObjectRequest(endPoint, requestBody), publishProcessor, responseClassType);
                         else
-                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.postFlowableMultipartObjectRequest(endPoint,queryParams,requestBody,multipartFile),publishProcessor,responseClassType);
+                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.postFlowableMultipartObjectRequest(endPoint, queryParams, requestBody, multipartFile), publishProcessor, responseClassType);
                         break;
                     case ObservableType.COMPLETABLE:
 
@@ -191,6 +188,52 @@ public class RxNetworkRequest<T>
                 break;
 
             case RequestType.DELETE:
+
+                switch (observableType) {
+                    case ObservableType.SINGLE:
+                        if (requestBody == null && multipartFile == null) {
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.deleteSingleResponseBodyRequest(endPoint, queryParams), publishSubject, responseClassType);
+                        } else if (requestBody == null) {
+                            Log.d(TAG, "makeRequest endpoint: " + endPoint);
+                            Log.d(TAG, "makeRequest: requestbody");
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.deleteSingleResponseBodyRequest(endPoint, multipartFile), publishSubject, responseClassType);
+                        } else if (multipartFile == null) {
+                            Log.d(TAG, "makeRequest: " + retrofit.baseUrl());
+                            Log.d(TAG, "makeRequest endpoint: multiport " + endPoint +" :"+ requestBody.contentType());
+                            Log.d(TAG, "makeRequest: " + responseClassType.getCanonicalName());
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.deleteSingleResponseBodyRequest(endPoint, requestBody), publishSubject, responseClassType);
+//                            rxNetWorkApiCallHelper.call(apiInterfaceService.makeRegistrationApiCall("eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZkZUBuZm4iLCJuYW1lIjoiUmF0aGlzaCIsImV4cCI6MTU0ODkxNzgxNn0.ndfmJI7c0twM9DnUZWQiKN-ZVCY_lvzWsyKgF6m9nEo", requestBody), publishSubject, responseClassType);
+                        } else
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.deleteSingleResponseBodyRequest(endPoint, queryParams, requestBody, multipartFile), publishSubject, responseClassType);
+                        break;
+                    case ObservableType.MAYBE:
+                        if (requestBody == null && multipartFile == null)
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.deleteMaybeResponseBodyRequest(endPoint, queryParams), publishSubject, responseClassType);
+                        else if (requestBody == null)
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.deleteMaybeResponseBodyRequest(endPoint, multipartFile), publishSubject, responseClassType);
+                        else if (multipartFile == null)
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.deleteMaybeResponseBodyRequest(endPoint, requestBody), publishSubject, responseClassType);
+                        else
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.deleteMaybeResponseBodyRequest(endPoint, queryParams, requestBody, multipartFile), publishSubject, responseClassType);
+                        break;
+
+
+                    case ObservableType.FLOWABLE:
+
+                        if (requestBody == null && multipartFile == null) {
+                            Log.d(TAG, "makeRequest: call Post");
+                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.deleteFlowableResponseBodyRequest(endPoint, queryParams), publishProcessor, responseClassType);
+                        } else if (requestBody == null)
+                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.deleteFlowableResponseBodyRequest(endPoint, multipartFile), publishProcessor, responseClassType);
+                        else if (multipartFile == null)
+                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.deleteFlowableResponseBodyRequest(endPoint, requestBody), publishProcessor, responseClassType);
+                        else
+                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.deleteFlowableResponseBodyRequest(endPoint, queryParams, requestBody, multipartFile), publishProcessor, responseClassType);
+                        break;
+                    case ObservableType.COMPLETABLE:
+
+                }
+
                 break;
         }
 
@@ -203,10 +246,9 @@ public class RxNetworkRequest<T>
      * @param publishProcessor
      * @param message
      */
-    public void makeGraphqlRequest(PublishSubject<T> publishSubject,PublishProcessor<T> publishProcessor,String message)
-    {
-        requestType=RequestType.POST;
-        makeRequest(publishSubject,publishProcessor,message);
+    public void makeGraphqlRequest(PublishSubject<T> publishSubject, PublishProcessor<T> publishProcessor,String message) {
+        requestType = RequestType.POST;
+        makeRequest(publishSubject, publishProcessor,message);
     }
 
 
@@ -220,17 +262,7 @@ public class RxNetworkRequest<T>
         rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleMultipartRequest(endPoint,multipartFile),publishSubject,responseClassType);
     }
 
-    public Maybe<T> makeMaybeRequest() {
-        return  apiInterfaceService.getMaybeObject(endPoint,queryParams);
-    }
 
-    public Flowable<T> makeFlowableRequest() {
-        return apiInterfaceService.getFlowableObject(endPoint,queryParams);
-    }
-
-    public Observable<T> makeObservableRequest() {
-        return apiInterfaceService.getObservable(endPoint,queryParams);
-    }
 
     public static class RxNetworkRequestBuilder<T>
     {
@@ -253,11 +285,11 @@ public class RxNetworkRequest<T>
         Activity activity;
 
 
-        public RxNetworkRequestBuilder(Activity activity,String endPoint, @ObservableType String observableType, @RequestType String requestType, Class<T> responseClaasType) {
+        public RxNetworkRequestBuilder(Activity activity, String endPoint, @ObservableType String observableType, @RequestType String requestType, Class<T> responseClaasType) {
             this.endPoint = endPoint;
             this.observableType = observableType;
             this.responseClaasType=responseClaasType;
-            this.requestType=requestType;
+            this.requestType = requestType;
             this.activity=activity;
         }
 
