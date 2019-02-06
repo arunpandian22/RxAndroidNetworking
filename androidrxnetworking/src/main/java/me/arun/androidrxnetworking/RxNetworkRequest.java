@@ -259,7 +259,7 @@ public class RxNetworkRequest<T>
 
     public void makeImageUpload(PublishSubject<T> publishSubject) {
         RxNetWorkApiCallHelper<T> rxNetWorkApiCallHelper=new RxNetWorkApiCallHelper();
-        rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleMultipartRequest(endPoint,multipartFile),publishSubject,responseClassType);
+//        rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleMultipartRequest(endPoint,multipartFile),publishSubject,responseClassType);
     }
 
 

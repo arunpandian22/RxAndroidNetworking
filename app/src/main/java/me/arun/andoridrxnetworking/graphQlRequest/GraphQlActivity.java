@@ -1,4 +1,5 @@
 package me.arun.andoridrxnetworking.graphQlRequest;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.constraint.Guideline;
@@ -7,8 +8,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toolbar;
+
 import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observer;
@@ -18,10 +24,10 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 import me.arun.andoridrxnetworking.R;
-import me.arun.andoridrxnetworking.resModel.List;
 import me.arun.andoridrxnetworking.resModel.country.Country;
 import me.arun.andoridrxnetworking.resModel.country.Language;
 import me.arun.andoridrxnetworking.resModel.country.ModelCountry;
+import me.arun.andoridrxnetworking.utils.FeatureCategory;
 import me.arun.andoridrxnetworking.utils.QueryString;
 import me.arun.androidrxnetworking.Network_check;
 import me.arun.androidrxnetworking.NetworkingApiClient;
@@ -30,6 +36,7 @@ import me.arun.androidrxnetworking.ParamsUtil;
 import me.arun.androidrxnetworking.RequestType;
 import me.arun.androidrxnetworking.RxNetworkRequest;
 import okhttp3.RequestBody;
+
 public class GraphQlActivity extends AppCompatActivity {
     PublishSubject<ModelCountry> sourceGraphQl = PublishSubject.create();
     CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -56,13 +63,17 @@ public class GraphQlActivity extends AppCompatActivity {
     Guideline guidelineTop;
     @BindView(R.id.guidelineBottom)
     Guideline guidelineBottom;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph_ql);
         ButterKnife.bind(this);
+        toolbar.setTitle(FeatureCategory.GRAPH_QL);
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorAbTitle));
+        setActionBar(toolbar);
         source();
         apiCallSetup();
     }
@@ -95,22 +106,20 @@ public class GraphQlActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNext(ModelCountry modelCountry)
-            {
+            public void onNext(ModelCountry modelCountry) {
                 Log.d(TAG, "onNext: " + modelCountry.getData().getCountry());
-                if (modelCountry.getData()!=null)
-                {
-                    Country country=modelCountry.getData().getCountry();
+                if (modelCountry.getData() != null) {
+                    Country country = modelCountry.getData().getCountry();
                     tvCurrency.setText(country.getCurrency());
                     tvName.setText(country.getName());
                     tvEmoji.setText(country.getEmoji());
-                    java.util.List<String> languages=new ArrayList<>();
-                    for (Language language:country.getLanguages()){
+                    List<String> languages = new ArrayList<>();
+                    for (Language language : country.getLanguages()) {
                         languages.add(language.getName());
                     }
                     tvLanguages.setText(StringUtils.join(languages, ','));
 //);
-                }else
+                } else
                     imageView.setVisibility(View.INVISIBLE);
             }
 

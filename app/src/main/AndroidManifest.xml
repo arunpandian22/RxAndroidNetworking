@@ -24,13 +24,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".sampleRequest.SampleRequestActivity" />
-        <activity android:name=".fileUpload.FileUploadActivity" />
+        <activity android:name=".sampleRequest.SampleRequestActivity"
+            android:screenOrientation="portrait" />
+
+
+        <activity android:name=".fileUpload.FileUploadActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity
             android:name=".fileDownload.FileDownloadActivity"
             android:label="@string/title_activity_file_download"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".graphQlRequest.GraphQlActivity"></activity>
+        <activity android:name=".graphQlRequest.GraphQlActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

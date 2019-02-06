@@ -21,17 +21,14 @@ import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 import me.arun.andoridrxnetworking.adapter.FeatureCategoryAdapter;
 import me.arun.andoridrxnetworking.model.ModelFeatureCategory;
-import me.arun.andoridrxnetworking.resModel.ModelPatientSearch;
 import me.arun.andoridrxnetworking.utils.FeatureCategory;
-import me.arun.andoridrxnetworking.utils.Imageutils;
 import me.arun.androidrxnetworking.NetworkingApiClient;
 import me.arun.androidrxnetworking.ObservableType;
 import me.arun.androidrxnetworking.RequestType;
-import me.arun.androidrxnetworking.ResponseType;
 import me.arun.androidrxnetworking.RxNetworkRequest;
 import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
     Retrofit retrofit;
     String TAG = "MainActivity";
     PublishSubject<ResponseBody> source = PublishSubject.create();
