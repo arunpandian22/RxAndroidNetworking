@@ -38,6 +38,7 @@ public class RxNetworkRequest<T>
     private Map<String, String> headerParams = new HashMap<>();
     private Map<String, String> queryParams = new HashMap<>();
     private Map<String, String> fieldsParams = new HashMap<>();
+    private Map<String,String> partParams=new HashMap<>();
     ApiInterfaceService apiInterfaceService;
     Retrofit retrofit;
     MultipartBody.Part multipartFile;
@@ -55,6 +56,10 @@ public class RxNetworkRequest<T>
             this.queryParams = rxNetworkRequestBuilder.queryParams;
         if (rxNetworkRequestBuilder.headerParams != null && !rxNetworkRequestBuilder.headerParams.isEmpty())
             this.headerParams = rxNetworkRequestBuilder.headerParams;
+        if (rxNetworkRequestBuilder.partParams != null && !rxNetworkRequestBuilder.partParams.isEmpty())
+            this.partParams = rxNetworkRequestBuilder.partParams;
+        if (rxNetworkRequestBuilder.fieldsParams != null && !rxNetworkRequestBuilder.fieldsParams.isEmpty())
+            this.fieldsParams= rxNetworkRequestBuilder.fieldsParams;
         if (rxNetworkRequestBuilder.requestBody!=null)
             this.requestBody=rxNetworkRequestBuilder.requestBody;
         if (rxNetworkRequestBuilder.requestType!=null)
@@ -126,6 +131,7 @@ public class RxNetworkRequest<T>
                         rxNetWorkApiCallHelper.call(apiInterfaceService.getSingleObject(endPoint, queryParams), publishSubject, responseClassType);
                         break;
                     case ObservableType.MAYBE:
+                        rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.getMaybeObject(endPoint, queryParams), publishSubject, responseClassType);
                         break;
                     case ObservableType.FLOWABLE:
                         rxNetWorkApiCallHelper.callFlowable(apiInterfaceService.getFlowableObject(endPoint, queryParams), publishProcessor, responseClassType);
@@ -282,6 +288,7 @@ public class RxNetworkRequest<T>
         private Map<String, String> queryParams = new HashMap<>();
         private Map<String, String> fieldsParams = new HashMap<>();
         private Map<String, String> headerParams = new HashMap<>();
+        private Map<String,String> partParams=new HashMap<>();
         Activity activity;
 
 
@@ -347,6 +354,11 @@ public class RxNetworkRequest<T>
 
         public RxNetworkRequestBuilder setFieldsParams(Map<String, String> fieldsParams) {
             this.fieldsParams = fieldsParams;
+            return this;
+        }
+
+        public RxNetworkRequestBuilder setPartParams(Map<String, String> partParams) {
+            this.partParams = partParams;
             return this;
         }
 

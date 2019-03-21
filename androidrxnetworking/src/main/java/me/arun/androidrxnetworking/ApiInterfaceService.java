@@ -20,6 +20,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
@@ -146,13 +147,26 @@ public interface ApiInterfaceService
 
     @Multipart
     @POST
+    Single<ResponseBody> postSingleMultipartPartParamsRequest(@Url String url, @Part MultipartBody.Part file,@PartMap Map<String,String> partParams);
+
+    @Multipart
+    @POST
     Flowable<ResponseBody> postFlowableMultipartRequest(@Url String url, @Part MultipartBody.Part file);
+
+
+    @Multipart
+    @POST
+    Flowable<ResponseBody> postFlowableMultipartPartParamsRequest(@Url String url, @Part MultipartBody.Part file,@PartMap Map<String,String> partParams);
 
 
     @Multipart
     @POST
     Maybe<ResponseBody> postMaybeMultipartRequest(@Url String url, @Part MultipartBody.Part file);
 
+
+    @Multipart
+    @POST
+    Maybe<ResponseBody> postMaybeMultipartPartParamsRequest(@Url String url, @Part MultipartBody.Part file,@PartMap Map<String,String> partParams);
 
     @Multipart
     @POST
@@ -193,6 +207,7 @@ public interface ApiInterfaceService
     @Multipart
     @POST
     Flowable<ResponseBody> postFlowableMultipartObjectRequest(@Url String url, @Part MultipartBody.Part file);
+
 
 
     @Multipart
