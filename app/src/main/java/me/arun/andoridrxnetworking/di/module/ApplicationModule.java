@@ -5,7 +5,6 @@ import dagger.Module;
 import dagger.Provides;
 import me.arun.andoridrxnetworking.RXNetworkingApplication;
 import me.arun.andoridrxnetworking.di.ApplicationContext;
-
 @Module
 public class ApplicationModule
 {

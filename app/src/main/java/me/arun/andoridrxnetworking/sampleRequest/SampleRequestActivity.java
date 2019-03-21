@@ -107,11 +107,10 @@ public class SampleRequestActivity extends AppCompatActivity
                     movieListAdapter.addMovies(movieList);
                 }
             }
-
-
             @Override
             public void onError(Throwable t) {
                 Log.d(TAG, "onError: " + t.getLocalizedMessage());
+                Log.d(TAG, "onError: cause: "+t.getCause());
                 loading=false;
             }
 

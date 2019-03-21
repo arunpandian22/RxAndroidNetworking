@@ -435,4 +435,17 @@ public interface ApiInterfaceService
     Observable<ResponseBody> deleteObservableResponseBodyRequest(@Url String url, @QueryMap Map<String, String> params, @FieldMap Map<String, String> fields);
 
 
+
+    /*
+    @Multipart
+    @POST("add_reports")
+    Single<InvestigationReportImageResponseModel> getInvestReportImg(@Header("token") String auth,
+                                                                     @Part MultipartBody.Part image,
+                                                                     @Part("appointment_id") RequestBody appId,
+                                                                     @Part("title")   RequestBody title,
+                                                                     @Part("description") RequestBody desc,
+                                                                     @Part("date")   RequestBody date,
+                                                                     @Part("tags") RequestBody tags,
+                                                                     @Part("tag_id")   RequestBody tag_id);
+*/
 }

@@ -30,7 +30,6 @@
 
         <activity android:name=".fileUpload.FileUploadActivity"
             android:screenOrientation="portrait">
-
         </activity>
         <activity
             android:name=".fileDownload.FileDownloadActivity"
