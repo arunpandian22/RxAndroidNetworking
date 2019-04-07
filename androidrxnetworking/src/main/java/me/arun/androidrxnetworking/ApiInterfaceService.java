@@ -33,10 +33,25 @@ public interface ApiInterfaceService
 {
     //Get custom object Request
 
-    //for no params
+    // Get Params
+    //for Single
+
     @Headers({"Accept: application/json"})
     @GET
     Single<ResponseBody> getSingleObject(@Url String url);
+
+    @Headers({"Accept: application/json"})
+    @GET
+    Single<ResponseBody> getSingleObject(@Url String url, @QueryMap Map<String, String> params);
+
+    @Streaming
+    @GET
+    Single<ResponseBody> getImageSinglePublicRequest(@Url String url);
+
+
+
+
+    // Get request Flowable type
 
     @Headers({"Accept: application/json"})
     @GET
@@ -44,8 +59,22 @@ public interface ApiInterfaceService
 
     @Headers({"Accept: application/json"})
     @GET
+    Flowable<ResponseBody> getFlowableObject(@Url String url, @QueryMap Map<String, String> params);
+
+
+    // Get  request Maybe type
+
+    @Headers({"Accept: application/json"})
+    @GET
     Maybe<ResponseBody> getMaybeObject(@Url String url);
 
+    @Headers({"Accept: application/json"})
+    @GET
+    Maybe<ResponseBody> getMaybeObject(@Url String url, @QueryMap Map<String, String> params);
+
+
+
+    // Get request  Observable type
     @Headers({"Accept: application/json"})
     @GET
     Observable<ResponseBody> getObservable(@Url String url);
@@ -53,207 +82,225 @@ public interface ApiInterfaceService
 
     @Headers({"Accept: application/json"})
     @GET
-    Single<ResponseBody> getSingleObject(@Url String url, @QueryMap Map<String, String> params);
-
-    @Headers({"Accept: application/json"})
-    @GET
-    Flowable<ResponseBody> getFlowableObject(@Url String url, @QueryMap Map<String, String> params);
-
-    @Headers({"Accept: application/json"})
-    @GET
-    Maybe<ResponseBody> getMaybeObject(@Url String url, @QueryMap Map<String, String> params);
-
-    @Headers({"Accept: application/json"})
-    @GET
     Observable<ResponseBody> getObservable(@Url String url, @QueryMap Map<String, String> params);
-
-    // for full url from any other website
-    @Streaming
-    @GET
-    Single<ResponseBody> getImageSinglePublicRequest(@Url String url);
-
-    @Streaming
-    @GET
-    Single<Bitmap> getImageBitMapSingleRequest(@Url String url);
-
-    @Streaming
-    @GET
-    Flowable<Bitmap> getImageBitMapFlowablRequest(@Url String url);
-
-    @Streaming
-    @GET
-    Maybe<Bitmap> getImageBitMapMayBeRequest(@Url String url);
-
-    @Streaming
-    @GET
-    Observable<Bitmap> getImageBitMapObservableRequest(@Url String url);
-
-
-
-    // get bitmap with param passing
-    @Streaming
-    @GET
-    Single<Bitmap> getImageBitMapSingleRequest(@Url String url, @QueryMap Map<String, Object> params);
-
-    @Streaming
-    @GET
-    Maybe<Bitmap> getImageBitMapMaybeRequest(@Url String url, @QueryMap Map<String, Object> params);
-
-    @Streaming
-    @GET
-    Flowable<Bitmap> getImageBitMapFlowableRequest(@Url String url, @QueryMap Map<String, Object> params);
-
-    @Streaming
-    @GET
-    Observable<Bitmap> getImageBitMapObservableRequest(@Url String url, @QueryMap Map<String, Object> params);
-
-
 
 
 
 
     //Post okkhttp3 ResponseBody  request
 
+
+    /*Post type network calls */
+
+
     @Headers({"Accept: application/json"})
     @POST
     Single<ResponseBody> postSingleResponseBodyRequest(@Url String url);
 
 
+    @Headers({"Accept: application/json"})
+    @POST
+    Single<ResponseBody> postSingleQueryParamObjectRequest(@Url String url, @QueryMap Map<String, String> params);
 
+
+    @FormUrlEncoded
+    @POST
+    Single<ResponseBody> postSingleFormUrlEncodedRequest(@Url String url, @FieldMap Map<String, String> fields);
+
+
+    @POST
+    Single<ResponseBody> postSingleRequsetBodyRequest(@Url String url, @Body RequestBody post);
+
+
+    @POST
+    Single<ResponseBody> postSingleBodyQueryParamsObjectRequestquest(@Url String url, @QueryMap Map<String, String> params, @Body RequestBody post);
+
+
+
+    @POST
+    Single<ResponseBody> postSingleBodyPartObjectRequestquest(@Url String url, @PartMap Map<String, String> params, @Body RequestBody post);
+
+
+
+    @Multipart
+    @POST
+    Single<ResponseBody> postSingleMultiPartObjectRequest(@Url String url, @Part MultipartBody.Part file);
+
+
+    @Multipart
+    @POST
+    Single<ResponseBody> postSingleMultipartPartParamRequest(@Url String url, @Part MultipartBody.Part file,@PartMap Map<String,String> partParams);
+
+    @Multipart
+    @POST
+    Single<ResponseBody> postSingleMultipartQueryParamRequest(@Url String url, @Part MultipartBody.Part file,@QueryMap Map<String,String> queryParams);
+
+    @Multipart
+    @POST
+    Single<ResponseBody> postSingleMultipartBodyPartParamRequest(@Url String url, @Part MultipartBody.Part file,@PartMap Map<String,String> partParams,@Body RequestBody requestBody);
+
+
+    @Multipart
+    @POST
+    Single<ResponseBody> postSingleMultipartBodyQueryParamRequest(@Url String url, @Part MultipartBody.Part file,@QueryMap Map<String,String> partParams,@Body  RequestBody BrequestBody);
+
+
+
+
+
+
+
+
+
+    // Flowable post request type method
+
+    @Headers({"Accept: application/json"})
+    @POST
+    Flowable<ResponseBody> postFlowableResponseBodyRequest(@Url String url);
 
 
     @Headers({"Accept: application/json"})
     @POST
-    Single<ResponseBody> postSingleResponseBodyRequest(@Url String url, @QueryMap Map<String, String> params);
+    Flowable<ResponseBody> postFlowableQueryParamObjectRequest(@Url String url, @QueryMap Map<String, String> params);
+
+
+    @FormUrlEncoded
+    @POST
+    Flowable<ResponseBody> postFlowableFormUrlEncodedRequest(@Url String url, @FieldMap Map<String, String> fields);
+
+
+    @POST
+    Flowable<ResponseBody> postFlowableRequsetBodyRequest(@Url String url, @Body RequestBody post);
+
+
+    @POST
+    Flowable<ResponseBody> postFlowableBodyQueryParamsObjectRequestquest(@Url String url, @QueryMap Map<String, String> params, @Body RequestBody post);
+
+
+
+    @Multipart
+    @POST
+    Flowable<ResponseBody> postFlowableBodyPartObjectRequestquest(@Url String url, @PartMap Map<String, String> params, @Body RequestBody post);
+
+
+
+    @Multipart
+    @POST
+    Flowable<ResponseBody> postFlowableMultiPartObjectRequest(@Url String url, @Part MultipartBody.Part file);
+
+
+    @Multipart
+    @POST
+    Flowable<ResponseBody> postFlowableMultipartPartParamRequest(@Url String url, @Part MultipartBody.Part file,@PartMap Map<String,String> partParams);
+
+    @Multipart
+    @POST
+    Flowable<ResponseBody> postFlowableMultipartQueryParamRequest(@Url String url, @Part MultipartBody.Part file,@QueryMap Map<String,String> queryParams);
+
+    @Multipart
+    @POST
+    Flowable<ResponseBody> postFlowableMultipartBodyPartParamRequest(@Url String url, @Part MultipartBody.Part file,@PartMap Map<String,String> partParams,@Body RequestBody requestBody);
+
+
+    @Multipart
+    @POST
+    Flowable<ResponseBody> postFlowableMultipartBodyQueryParamRequest(@Url String url, @Part MultipartBody.Part file,@QueryMap Map<String,String> partParams,@Body  RequestBody BrequestBody);
+
+
+
+
+    // Maybe Post request type
+    @Headers({"Accept: application/json"})
+    @POST
+    Maybe<ResponseBody> postMaybeResponseBodyRequest(@Url String url);
+
 
     @Headers({"Accept: application/json"})
     @POST
-    Flowable<ResponseBody> postFlowableResponseBodyRequest(@Url String url, @QueryMap Map<String, String> params);
+    Maybe<ResponseBody> postMaybeQueryParamObjectRequest(@Url String url, @QueryMap Map<String, String> params);
+
+
+    @FormUrlEncoded
+    @POST
+    Maybe<ResponseBody> postMaybeFormUrlEncodedRequest(@Url String url, @FieldMap Map<String, String> fields);
+
+
+    @POST
+    Maybe<ResponseBody> postMaybeRequsetBodyRequest(@Url String url, @Body RequestBody post);
+
+
+    @POST
+    Maybe<ResponseBody> postMaybeBodyQueryParamsObjectRequestquest(@Url String url, @QueryMap Map<String, String> params, @Body RequestBody post);
+
+
+    @Multipart
+    @POST
+    Maybe<ResponseBody> postMaybeBodyPartObjectRequestquest(@Url String url, @PartMap Map<String, String> params, @Body RequestBody post);
+
+    @Multipart
+    @POST
+    Maybe<ResponseBody> postMaybeMultiPartObjectRequest(@Url String url, @Part MultipartBody.Part file);
+
+    @Multipart
+    @POST
+    Maybe<ResponseBody> postMaybeMultipartPartParamRequest(@Url String url, @Part MultipartBody.Part file,@PartMap Map<String,String> partParams);
+
+    @Multipart
+    @POST
+    Maybe<ResponseBody> postMaybeMultipartQueryParamRequest(@Url String url, @Part MultipartBody.Part file,@QueryMap Map<String,String> queryParams);
+
+    @Multipart
+    @POST
+    Maybe<ResponseBody> postMaybeMultipartBodyPartParamRequest(@Url String url, @Part MultipartBody.Part file,@PartMap Map<String,String> partParams,@Body RequestBody requestBody);
+
+    @Multipart
+    @POST
+    Maybe<ResponseBody> postMaybeMultipartBodyQueryParamRequest(@Url String url, @Part MultipartBody.Part file,@QueryMap Map<String,String> queryParams,@Body RequestBody requestBody);
+
+    //Observable post type
+
 
     @Headers({"Accept: application/json"})
     @POST
-    Maybe<ResponseBody> postMaybeResponseBodyRequest(@Url String url, @QueryMap Map<String, String> params);
+    Observable<ResponseBody> postObservableResponseBodyRequest(@Url String url);
+
 
     @Headers({"Accept: application/json"})
     @POST
-    Observable<ResponseBody> postObservableResponseBodyRequest(@Url String url, @QueryMap Map<String, String> params);
-
-
-    //post okhttp3 Response body with multipart and requsetbody request in android
-
-    @Multipart
-    @POST
-    Single<ResponseBody> postSingleMultipartRequest(@Url String url, @Part MultipartBody.Part file);
-
-    @Multipart
-    @POST
-    Single<ResponseBody> postSingleMultipartPartParamsRequest(@Url String url, @Part MultipartBody.Part file,@PartMap Map<String,String> partParams);
-
-    @Multipart
-    @POST
-    Flowable<ResponseBody> postFlowableMultipartRequest(@Url String url, @Part MultipartBody.Part file);
-
-
-    @Multipart
-    @POST
-    Flowable<ResponseBody> postFlowableMultipartPartParamsRequest(@Url String url, @Part MultipartBody.Part file,@PartMap Map<String,String> partParams);
-
-
-    @Multipart
-    @POST
-    Maybe<ResponseBody> postMaybeMultipartRequest(@Url String url, @Part MultipartBody.Part file);
-
-
-    @Multipart
-    @POST
-    Maybe<ResponseBody> postMaybeMultipartPartParamsRequest(@Url String url, @Part MultipartBody.Part file,@PartMap Map<String,String> partParams);
+    Observable<ResponseBody> postObservableObjectRequest(@Url String url, @QueryMap Map<String, String> params);
 
     @Multipart
     @POST
     Observable<ResponseBody> postObservableMultipartRequest(@Url String url, @Part MultipartBody.Part file);
 
-    // post request body
-    @POST
-    Single<ResponseBody> postRequsetBodySingleRequest(@Url String url, @Body RequestBody post);
-
-    @POST
-    Flowable<ResponseBody> postRequsetBodyFlowableRequest(@Url String url, @Body RequestBody post);
-
-    @POST
-    Maybe<ResponseBody> postRequsetBodyMaybeRequest(@Url String url, @Body RequestBody post);
-
-    @POST
-    Observable<ResponseBody> postRequsetBodyObservableRequest(@Url String url, @Body RequestBody post);
-
-
-    //Post custom  request
-
-
-    @Headers({"Accept: application/json"})
-    @POST
-    Flowable<ResponseBody> postFlowableObjectRequest(@Url String url, @QueryMap Map<String, String> params);
-
-    @Headers({"Accept: application/json"})
-    @POST
-    Maybe<ResponseBody> postMaybeObjectRequest(@Url String url, @QueryMap Map<String, String> params);
-
-
 
     @Multipart
     @POST
-    Single<ResponseBody> postSingleMultipartObjectRequestquest(@Url String url, @QueryMap Map<String, String> params, @Body RequestBody post, @Part MultipartBody.Part file);
-
-
-    @Multipart
-    @POST
-    Flowable<ResponseBody> postFlowableMultipartObjectRequest(@Url String url, @Part MultipartBody.Part file);
-
-
-
-    @Multipart
-    @POST
-    Flowable<ResponseBody> postFlowableMultipartObjectRequest(@Url String url, @QueryMap Map<String, String> params, @Body RequestBody post, @Part MultipartBody.Part file);
-
-
-    @Multipart
-    @POST
-    Maybe<ResponseBody> postMaybeMultipartObjectRequest(@Url String url, @Part MultipartBody.Part file);
-
-
-    // post request body
-    @POST
-    Single<ResponseBody> postSingleObjectRequest(@Url String url, @Body RequestBody post);
+    Observable<ResponseBody> postObservableMultipartPartParamsRequest(@Url String url, @Part MultipartBody.Part file,@PartMap Map<String,String> partParams);
 
     @POST
-    Flowable<ResponseBody> postflowableObjectRequest(@Url String url, @Body RequestBody post);
-
-    @POST
-    Maybe<ResponseBody> postMaybeObjectRequest(@Url String url, @Body RequestBody post);
-
-
-    @Multipart
-    @POST
-    Maybe<ResponseBody> postMaybeMultipartObjectRequest(@Url String url, @QueryMap Map<String, String> params, @Body RequestBody post, @Part MultipartBody.Part file);
-
+    Observable<ResponseBody> postObservableObjectRequest(@Url String url, @Body RequestBody post);
 
     @FormUrlEncoded
     @POST
-    Single<ResponseBody> postFormUrlEncodedSingleRequest(@FieldMap Map<String, String> fields, @Url String url);
+    Observable<ResponseBody> postObservableFormUrlEncodedRequest(@FieldMap Map<String, String> fields, @Url String url);
 
 
-    @FormUrlEncoded
+    @Multipart
     @POST
-    Flowable<ResponseBody> postFormUrlEncodedFlowableRequest(@FieldMap Map<String, String> fields, @Url String url);
+    Observable<ResponseBody> postObservableMultipartParamRequest(@Url String url, @Part MultipartBody.Part file,@QueryMap Map<String,String> partParams);
 
 
-    @FormUrlEncoded
+    @Multipart
     @POST
-    Maybe<ResponseBody> postFormUrlEncodedMaybeRequest(@FieldMap Map<String, String> fields, @Url String url);
+    Observable<ResponseBody> postObservableMultipartBodyObjectRequest(@Url String url, @QueryMap Map<String, String> params, @Body RequestBody post, @Part MultipartBody.Part file);
 
 
-    @FormUrlEncoded
-    @POST
-    Observable<ResponseBody> postFormUrlEncodedObservabRequest(@FieldMap Map<String, String> fields, @Url String url);
+
+
+
+
+
 
 
     // PUT  custom object request
@@ -280,11 +327,24 @@ public interface ApiInterfaceService
     Single<ResponseBody> putSingleResponseBodyRequest(@Url String url, @QueryMap Map<String, String> params, @FieldMap Map<String, String> fields);
 
 
+    @Multipart
+    @PUT
+    Single<ResponseBody> putSingleResponseBodyRequest(@Url String url, @QueryMap Map<String, String> params, @Body RequestBody post, @Part MultipartBody.Part file);
+
+
+    @Multipart
+    @PUT
+    Single<ResponseBody> putSingleResponseBodyRequest(@Url String url, @Part MultipartBody.Part file);
+
     @PUT
     Flowable<ResponseBody> putFlowableResponseBodyRequest(@Url String url);
 
     @PUT
     Flowable<ResponseBody> putFlowableResponseBodyRequest(@Url String url, @Body RequestBody post);
+
+    @Multipart
+    @PUT
+    Flowable<ResponseBody> putFlowableResponseBodyRequest(@Url String url, @Part MultipartBody.Part file);
 
     @FormUrlEncoded
     @PUT
@@ -301,11 +361,20 @@ public interface ApiInterfaceService
     Flowable<ResponseBody> putFlowableResponseBodyRequest(@Url String url, @QueryMap Map<String, String> params, @FieldMap Map<String, String> fields);
 
 
+    @Multipart
+    @PUT
+    Flowable<ResponseBody> putFlowableResponseBodyRequest(@Url String url, @QueryMap Map<String, String> params, @Body RequestBody post, @Part MultipartBody.Part file);
+
+
     @PUT
     Maybe<ResponseBody> putMaybeResponseBodyRequest(@Url String url);
 
     @PUT
     Maybe<ResponseBody> putMaybeResponseBodyRequest(@Url String url, @Body RequestBody post);
+
+    @Multipart
+    @PUT
+    Maybe<ResponseBody> putMaybeResponseBodyRequest(@Url String url, @Part MultipartBody.Part file);
 
     @FormUrlEncoded
     @PUT
@@ -320,6 +389,10 @@ public interface ApiInterfaceService
     @FormUrlEncoded
     @PUT
     Maybe<ResponseBody> putMaybeResponseBodyRequest(@Url String url, @QueryMap Map<String, String> params, @FieldMap Map<String, String> fields);
+
+    @Multipart
+    @PUT
+    Maybe<ResponseBody> putMaybeResponseBodyRequest(@Url String url, @QueryMap Map<String, String> params, @Body RequestBody post, @Part MultipartBody.Part file);
 
 
     @PUT
@@ -399,8 +472,9 @@ public interface ApiInterfaceService
     @HTTP(method = "DELETE", hasBody = true)
     Flowable<ResponseBody> deleteFlowableResponseBodyRequest(@Url String url, @QueryMap Map<String, String> params, @FieldMap Map<String, String> fields);
 
+    @Multipart
     @DELETE
-    Flowable<ResponseBody> deleteFlowableResponseBodyRequest(@Url String url, @QueryMap Map<String, String> params, @Body RequestBody post, @Part MultipartBody.Part file);;
+    Flowable<ResponseBody> deleteFlowableResponseBodyRequest(@Url String url, @QueryMap Map<String, String> params, @Body RequestBody post, @Part MultipartBody.Part file);
 
 
 

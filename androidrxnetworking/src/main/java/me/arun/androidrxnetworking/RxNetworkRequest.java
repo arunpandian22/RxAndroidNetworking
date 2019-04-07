@@ -3,13 +3,8 @@ package me.arun.androidrxnetworking;
 import android.app.Activity;
 import android.text.TextUtils;
 import android.util.Log;
-
 import java.util.HashMap;
 import java.util.Map;
-
-import io.reactivex.Flowable;
-import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.processors.PublishProcessor;
 import io.reactivex.subjects.PublishSubject;
@@ -128,15 +123,31 @@ public class RxNetworkRequest<T>
                 switch (observableType) {
                     case ObservableType.SINGLE:
                         Log.d(TAG, "makeRequest endpoint: " + endPoint);
+
+                        if (queryParams!=null && !queryParams.isEmpty())
                         rxNetWorkApiCallHelper.call(apiInterfaceService.getSingleObject(endPoint, queryParams), publishSubject, responseClassType);
+                        else
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.getSingleObject(endPoint), publishSubject, responseClassType);
+
                         break;
                     case ObservableType.MAYBE:
+                        if (queryParams!=null && !queryParams.isEmpty())
                         rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.getMaybeObject(endPoint, queryParams), publishSubject, responseClassType);
+                        else
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.getMaybeObject(endPoint), publishSubject, responseClassType);
                         break;
+
+
                     case ObservableType.FLOWABLE:
-                        rxNetWorkApiCallHelper.callFlowable(apiInterfaceService.getFlowableObject(endPoint, queryParams), publishProcessor, responseClassType);
+
+                        if (queryParams!=null && !queryParams.isEmpty()) {
+                            rxNetWorkApiCallHelper.callFlowable(apiInterfaceService.getFlowableObject(endPoint, queryParams), publishProcessor, responseClassType);
+                        } else {
+                            rxNetWorkApiCallHelper.callFlowable(apiInterfaceService.getFlowableObject(endPoint), publishProcessor, responseClassType);
+                        }
                         break;
                     case ObservableType.COMPLETABLE:
+                        break;
                 }
             }
 
@@ -145,30 +156,125 @@ public class RxNetworkRequest<T>
             case RequestType.POST:
                 switch (observableType) {
                     case ObservableType.SINGLE:
+                        //
+                        if (multipartFile!=null && requestBody!= null && (partParams!=null && !partParams.isEmpty() ) ) {
+                            rxNetWorkApiCallHelper.call(apiInterfaceService. postSingleMultipartBodyPartParamRequest(endPoint,multipartFile,partParams,requestBody), publishSubject, responseClassType);
+                            
+                        }else if (multipartFile!=null && requestBody!= null && (queryParams!=null && !queryParams.isEmpty()) ){
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleMultipartBodyQueryParamRequest(endPoint,multipartFile,queryParams,requestBody), publishSubject, responseClassType);
+
+                        } else if (multipartFile!=null && (queryParams!=null && !queryParams.isEmpty())){
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleMultipartQueryParamRequest(endPoint, multipartFile,queryParams), publishSubject, responseClassType);
+
+                        }else if (multipartFile!=null && (partParams!=null && !partParams.isEmpty())){
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleMultipartPartParamRequest(endPoint, multipartFile,partParams), publishSubject, responseClassType);
+                        }else if (multipartFile!=null){
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleMultiPartObjectRequest(endPoint, multipartFile), publishSubject, responseClassType);
+                        }else if (requestBody!=null && (queryParams!=null && !queryParams.isEmpty())){
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleBodyQueryParamsObjectRequestquest(endPoint, queryParams,requestBody), publishSubject, responseClassType);
+                        }else if (requestBody!=null){
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleRequsetBodyRequest(endPoint,requestBody), publishSubject, responseClassType);
+                        }else if ((queryParams!=null && !queryParams.isEmpty())){
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleQueryParamObjectRequest(endPoint, queryParams), publishSubject, responseClassType);
+                        }else if ((fieldsParams!=null && !fieldsParams.isEmpty())){
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleFormUrlEncodedRequest(endPoint, fieldsParams), publishSubject, responseClassType);
+
+                        }else if (queryParams==null || queryParams.isEmpty()){
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleQueryParamObjectRequest(endPoint, queryParams), publishSubject, responseClassType);
+
+                        }else {
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleResponseBodyRequest(endPoint), publishSubject, responseClassType);
+                        }
+                        break;
+                    case ObservableType.MAYBE:
+
+                        if (multipartFile!=null && requestBody!= null && (partParams!=null && !partParams.isEmpty() ) ) {
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService. postMaybeMultipartBodyPartParamRequest(endPoint,multipartFile,partParams,requestBody), publishSubject, responseClassType);
+                        }else if (multipartFile!=null && requestBody!= null && (queryParams!=null && !queryParams.isEmpty()) ){
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeMultipartBodyQueryParamRequest(endPoint,multipartFile,queryParams,requestBody), publishSubject, responseClassType);
+                        } else if (multipartFile!=null && (queryParams!=null && !queryParams.isEmpty())){
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeMultipartQueryParamRequest(endPoint, multipartFile,queryParams), publishSubject, responseClassType);
+                        }else if (multipartFile!=null && (partParams!=null && !partParams.isEmpty())){
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeMultipartPartParamRequest(endPoint, multipartFile,partParams), publishSubject, responseClassType);
+                        }else if (multipartFile!=null){
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeMultiPartObjectRequest(endPoint, multipartFile), publishSubject, responseClassType);
+                        }else if (requestBody!=null && (queryParams!=null && !queryParams.isEmpty())){
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeBodyQueryParamsObjectRequestquest(endPoint, queryParams,requestBody), publishSubject, responseClassType);
+                        }else if (requestBody!=null){
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeRequsetBodyRequest(endPoint,requestBody), publishSubject, responseClassType);
+                        }else if ((queryParams!=null && !queryParams.isEmpty())){
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeQueryParamObjectRequest(endPoint, queryParams), publishSubject, responseClassType);
+                        }else if ((fieldsParams!=null && !fieldsParams.isEmpty())){
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeFormUrlEncodedRequest(endPoint, fieldsParams), publishSubject, responseClassType);
+
+                        }else if (queryParams==null || queryParams.isEmpty()){
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeQueryParamObjectRequest(endPoint, queryParams), publishSubject, responseClassType);
+                        }else {
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeResponseBodyRequest(endPoint), publishSubject, responseClassType);
+                        }
+
+
+                    case ObservableType.FLOWABLE:
+
+                        if (multipartFile!=null && requestBody!= null && (partParams!=null && !partParams.isEmpty() ) ) {
+                            rxNetWorkApiCallHelper.callFlowable(apiInterfaceService. postFlowableMultipartBodyPartParamRequest(endPoint,multipartFile,partParams,requestBody), publishProcessor, responseClassType);
+                        }else if (multipartFile!=null && requestBody!= null && (queryParams!=null && !queryParams.isEmpty()) ){
+                            rxNetWorkApiCallHelper.callFlowable(apiInterfaceService.postFlowableMultipartBodyQueryParamRequest(endPoint,multipartFile,queryParams,requestBody), publishProcessor, responseClassType);
+                        } else if (multipartFile!=null && (queryParams!=null && !queryParams.isEmpty())){
+                            rxNetWorkApiCallHelper.callFlowable(apiInterfaceService.postFlowableMultipartQueryParamRequest(endPoint, multipartFile,queryParams), publishProcessor, responseClassType);
+                        }else if (multipartFile!=null && (partParams!=null && !partParams.isEmpty())){
+                            rxNetWorkApiCallHelper.callFlowable(apiInterfaceService.postFlowableMultipartPartParamRequest(endPoint, multipartFile,partParams),publishProcessor, responseClassType);
+                        }else if (multipartFile!=null){
+                            rxNetWorkApiCallHelper.callFlowable(apiInterfaceService.postFlowableMultiPartObjectRequest(endPoint, multipartFile), publishProcessor, responseClassType);
+                        }else if (requestBody!=null && (queryParams!=null && !queryParams.isEmpty())){
+                            rxNetWorkApiCallHelper.callFlowable(apiInterfaceService.postFlowableBodyQueryParamsObjectRequestquest(endPoint, queryParams,requestBody), publishProcessor, responseClassType);
+                        }else if (requestBody!=null){
+                            rxNetWorkApiCallHelper.callFlowable(apiInterfaceService.postFlowableRequsetBodyRequest(endPoint,requestBody),publishProcessor, responseClassType);
+                        }else if ((queryParams!=null && !queryParams.isEmpty())){
+                            rxNetWorkApiCallHelper.callFlowable(apiInterfaceService.postFlowableQueryParamObjectRequest(endPoint, queryParams),publishProcessor, responseClassType);
+                        }else if ((fieldsParams!=null && !fieldsParams.isEmpty())){
+                            rxNetWorkApiCallHelper.callFlowable(apiInterfaceService.postFlowableFormUrlEncodedRequest(endPoint, fieldsParams), publishProcessor, responseClassType);
+                        }else if (queryParams==null || queryParams.isEmpty()){
+                            rxNetWorkApiCallHelper.callFlowable(apiInterfaceService.postFlowableQueryParamObjectRequest(endPoint, queryParams),publishProcessor, responseClassType);
+                        }else {
+                            rxNetWorkApiCallHelper.callFlowable(apiInterfaceService.postFlowableResponseBodyRequest(endPoint), publishProcessor, responseClassType);
+                        }
+
+
+                    case ObservableType.COMPLETABLE:
+
+                }
+
+                break;
+
+            case RequestType.PUT: {
+
+                switch (observableType) {
+                    case ObservableType.SINGLE:
                         if (requestBody == null && multipartFile == null) {
-                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleResponseBodyRequest(endPoint, queryParams), publishSubject, responseClassType);
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.putSingleResponseBodyRequest(endPoint, queryParams), publishSubject, responseClassType);
                         } else if (requestBody == null) {
                             Log.d(TAG, "makeRequest endpoint: " + endPoint);
                             Log.d(TAG, "makeRequest: requestbody");
-                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleMultipartRequest(endPoint, multipartFile), publishSubject, responseClassType);
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.putSingleResponseBodyRequest(endPoint, multipartFile), publishSubject, responseClassType);
                         } else if (multipartFile == null) {
                             Log.d(TAG, "makeRequest: " + retrofit.baseUrl());
-                            Log.d(TAG, "makeRequest endpoint: multiport " + endPoint + requestBody.contentType());
+                            Log.d(TAG, "makeRequest endpoint: multiport " + endPoint +" :"+ requestBody.contentType());
                             Log.d(TAG, "makeRequest: " + responseClassType.getCanonicalName());
-                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleObjectRequest(endPoint, requestBody), publishSubject, responseClassType);
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.putSingleResponseBodyRequest(endPoint, requestBody), publishSubject, responseClassType);
 //                            rxNetWorkApiCallHelper.call(apiInterfaceService.makeRegistrationApiCall("eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImZkZUBuZm4iLCJuYW1lIjoiUmF0aGlzaCIsImV4cCI6MTU0ODkxNzgxNn0.ndfmJI7c0twM9DnUZWQiKN-ZVCY_lvzWsyKgF6m9nEo", requestBody), publishSubject, responseClassType);
                         } else
-                            rxNetWorkApiCallHelper.call(apiInterfaceService.postSingleMultipartObjectRequestquest(endPoint, queryParams, requestBody, multipartFile), publishSubject, responseClassType);
+                            rxNetWorkApiCallHelper.call(apiInterfaceService.putSingleResponseBodyRequest(endPoint, queryParams, requestBody, multipartFile), publishSubject, responseClassType);
                         break;
                     case ObservableType.MAYBE:
                         if (requestBody == null && multipartFile == null)
-                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeObjectRequest(endPoint, queryParams), publishSubject, responseClassType);
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.putMaybeResponseBodyRequest(endPoint, queryParams), publishSubject, responseClassType);
                         else if (requestBody == null)
-                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeMultipartRequest(endPoint, multipartFile), publishSubject, responseClassType);
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.putMaybeResponseBodyRequest(endPoint, multipartFile), publishSubject, responseClassType);
                         else if (multipartFile == null)
-                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeObjectRequest(endPoint, requestBody), publishSubject, responseClassType);
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.putMaybeResponseBodyRequest(endPoint, requestBody), publishSubject, responseClassType);
                         else
-                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.postMaybeMultipartObjectRequest(endPoint, queryParams, requestBody, multipartFile), publishSubject, responseClassType);
+                            rxNetWorkApiCallHelper.callMaybe(apiInterfaceService.putMaybeResponseBodyRequest(endPoint, queryParams, requestBody, multipartFile), publishSubject, responseClassType);
                         break;
 
 
@@ -176,22 +282,21 @@ public class RxNetworkRequest<T>
 
                         if (requestBody == null && multipartFile == null) {
                             Log.d(TAG, "makeRequest: call Post");
-                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.postFlowableObjectRequest(endPoint, queryParams), publishProcessor, responseClassType);
+                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.putFlowableResponseBodyRequest(endPoint, queryParams), publishProcessor, responseClassType);
                         } else if (requestBody == null)
-                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.postFlowableMultipartRequest(endPoint, multipartFile), publishProcessor, responseClassType);
+                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.putFlowableResponseBodyRequest(endPoint, multipartFile), publishProcessor, responseClassType);
                         else if (multipartFile == null)
-                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.postflowableObjectRequest(endPoint, requestBody), publishProcessor, responseClassType);
+                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.putFlowableResponseBodyRequest(endPoint, requestBody), publishProcessor, responseClassType);
                         else
-                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.postFlowableMultipartObjectRequest(endPoint, queryParams, requestBody, multipartFile), publishProcessor, responseClassType);
+                            rxNetWorkApiCallHelper.callPost(apiInterfaceService.putFlowableResponseBodyRequest(endPoint, queryParams, requestBody, multipartFile), publishProcessor, responseClassType);
                         break;
                     case ObservableType.COMPLETABLE:
 
                 }
+            }
 
-                break;
 
-            case RequestType.PUT:
-                break;
+            break;
 
             case RequestType.DELETE:
 
