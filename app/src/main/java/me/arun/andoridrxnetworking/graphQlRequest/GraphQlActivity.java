@@ -59,8 +59,7 @@ public class GraphQlActivity extends AppCompatActivity {
     TextView tvCurrency;
     @BindView(R.id.tvEmoji)
     TextView tvEmoji;
-    @BindView(R.id.guidelineTop)
-    Guideline guidelineTop;
+
     @BindView(R.id.guidelineBottom)
     Guideline guidelineBottom;
     @BindView(R.id.toolbar)

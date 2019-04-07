@@ -17,4 +17,7 @@
     <string name="notification_progress">Uploading image...</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
+
+
+    <string name="MultiplefileDownloadunderDevelopment">Multiple file downloads feature are in Under Development</string>
 </resources>
