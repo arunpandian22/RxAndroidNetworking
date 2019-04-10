@@ -172,5 +172,4 @@ rxNetworkRequest.setBody(file);
 **Known Issue:**
 
 * If once API failed to get a response then Subscription will be dead, so you have to again initialise the PublishSubject object and resubscribe to get the response
-* Still there are no options available to @part data and @Multipart params send in one request.
 
