@@ -14,6 +14,17 @@ No other library provides or supports Network calling using RxJava.
 * Chaining API Calls
 * we can choose thread whether the main thread or worker thread to get response. (Thread Handlings)
 
+
+** Dependency **
+
+Add the following dependency in your app level build.gradle
+
+```
+implementation'me.arun.androidrxnetworking:androidrxnetworking:1.0.1
+
+```
+
+
 **Implementing Network Call:**
 
 ``` java
