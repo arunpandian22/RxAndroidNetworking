@@ -6,8 +6,8 @@ A repo about the do network call using RxJava and Retrofit within 10minutes for 
 **Description:**
 Android Rx Networking Library is a powerful library for doing any type of networking in Android applications which is made on top of Retrofit Using RxJava.
 No other library provides or supports Network calling using RxJava.
-* Provides a simple interface for doing all types of things in networking like setting priority, cancelling, etc.
-* You can check Network availability using inbuilt function
+* Provides a simple interface for doing all types of things in networking like setting params, its type and response model like that
+* You can check Network availability using inbuilt function 
 
 **Why Using RxJava:**
 * RxJava Provides more operators to manipulating API response.
