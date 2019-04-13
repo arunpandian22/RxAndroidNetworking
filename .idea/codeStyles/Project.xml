@@ -1,7 +1,7 @@
 <component name="ProjectCodeStyleConfiguration">
   <code_scheme name="Project" version="173">
     <DBN-PSQL>
-      <case-options enabled="false">
+      <case-options enabled="true">
         <option name="KEYWORD_CASE" value="lower" />
         <option name="FUNCTION_CASE" value="lower" />
         <option name="PARAMETER_CASE" value="lower" />
@@ -11,7 +11,7 @@
       <formatting-settings enabled="false" />
     </DBN-PSQL>
     <DBN-SQL>
-      <case-options enabled="false">
+      <case-options enabled="true">
         <option name="KEYWORD_CASE" value="lower" />
         <option name="FUNCTION_CASE" value="lower" />
         <option name="PARAMETER_CASE" value="lower" />
@@ -50,7 +50,7 @@
       </extensions>
     </Objective-C-extensions>
     <DBN-PSQL>
-      <case-options enabled="false">
+      <case-options enabled="true">
         <option name="KEYWORD_CASE" value="lower" />
         <option name="FUNCTION_CASE" value="lower" />
         <option name="PARAMETER_CASE" value="lower" />
@@ -60,7 +60,7 @@
       <formatting-settings enabled="false" />
     </DBN-PSQL>
     <DBN-SQL>
-      <case-options enabled="false">
+      <case-options enabled="true">
         <option name="KEYWORD_CASE" value="lower" />
         <option name="FUNCTION_CASE" value="lower" />
         <option name="PARAMETER_CASE" value="lower" />

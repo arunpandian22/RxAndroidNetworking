@@ -4,8 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
+
 /**
- * Created by Jaison on 18/08/16.
+ * A class created to have the methods related to ProgressDoalogLoader
  */
 public class ProgressDialogLoader
 {
@@ -14,6 +15,7 @@ public class ProgressDialogLoader
     Context context;
     Activity activity;
     boolean isNetworkCall;
+
 
     public ProgressDialogLoader(Context context, boolean isNetworkCall)
     {
@@ -40,6 +42,13 @@ public class ProgressDialogLoader
         }
     }
 
+
+    /**
+     * A method to show the  dialog
+     * @param activity a
+     * @param progressBarData
+     * @param isNetworkCall
+     */
     public static void progressdialogCreation(Activity activity, ProgressBarData progressBarData,boolean isNetworkCall)
     {
         try {
@@ -56,6 +65,9 @@ public class ProgressDialogLoader
         }
     }
 
+    /**
+     * A method to dismiss the dialog
+     */
     public static void progressdialogDismiss()
     {
 

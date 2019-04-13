@@ -15,6 +15,9 @@ import static me.arun.androidrxnetworking.ObservableType.SINGLE;
  * Chennai
  */
 
+/**
+ * a annotation is used to define the Observable type
+ */
 @Retention(SOURCE)
 @StringDef({FLOWABLE, SINGLE, MAYBE, COMPLETABLE})
 public @interface ObservableType {

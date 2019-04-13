@@ -1,10 +1,8 @@
 package me.arun.androidrxnetworking;
 
 import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
@@ -29,6 +27,13 @@ public class RxNetWorkApiCallHelper<T>
 
     static  String TAG="RxNetWorkApiCallHelper";
 
+    /**
+     * This method makes api call request and return the result in the publish subject
+     * @param observable a observable type
+     * @param publishSubject publish subject
+     * @param responseType a response model type
+     * @return it returns the Disposable object later we can dispose this
+     */
     public   Disposable call(Single<ResponseBody> observable, final PublishSubject<T> publishSubject, final Class<T> responseType) {
 
         gson = new GsonBuilder().create();
@@ -94,7 +99,16 @@ public class RxNetWorkApiCallHelper<T>
     }
 
 
-    public Disposable callFlowable(Flowable<ResponseBody> observable, final PublishProcessor<T> publishSubject, final Class<T> responseType) {
+
+    /**
+     * This method makes api call request and return the result in the publish subject
+     * @param observable a observable type
+     * @param publishProcessor publish subject
+     * @param responseType a response model type
+     * @return it returns the Disposable object later we can dispose this
+     */
+
+    public Disposable callFlowable(Flowable<ResponseBody> observable, final PublishProcessor<T> publishProcessor, final Class<T> responseType) {
 
         gson = new GsonBuilder().create();
         if (observable == null) {
@@ -103,7 +117,7 @@ public class RxNetWorkApiCallHelper<T>
             throw new IllegalArgumentException("Observable must not be null.");
         }
 
-        if (publishSubject == null) {
+        if (publishProcessor == null) {
             ProgressDialogLoader.progressdialogDismiss();
             throw new IllegalArgumentException("Callback must not be null.");
         }
@@ -125,14 +139,14 @@ public class RxNetWorkApiCallHelper<T>
                             Log.i("Response", "test : " + gson);
                             Log.d(TAG, "accept: " + gson.fromJson(json, responseType));
                             Log.i("Response", "test : " + res + responseType.getName());
-                            Log.d(TAG, "accept: hassubscribers " + publishSubject.hasSubscribers());
+                            Log.d(TAG, "accept: hassubscribers " + publishProcessor.hasSubscribers());
                             if (res != null) {
-                                if (publishSubject.hasSubscribers())
-                                    publishSubject.onNext(res);
+                                if (publishProcessor.hasSubscribers())
+                                    publishProcessor.onNext(res);
                             }
                             else {
-                                if (publishSubject.hasSubscribers())
-                                    publishSubject.onError(new Throwable("null"));
+                                if (publishProcessor.hasSubscribers())
+                                    publishProcessor.onError(new Throwable("null"));
                             }
 
                         } catch (Exception e) {
@@ -151,11 +165,11 @@ public class RxNetWorkApiCallHelper<T>
                         // failure response
                        try {
                            if (throwable != null) {
-                               if (publishSubject.hasSubscribers())
-                               publishSubject.onError(throwable);
+                               if (publishProcessor.hasSubscribers())
+                               publishProcessor.onError(throwable);
                            } else {
-                               if (publishSubject.hasSubscribers())
-                                   publishSubject.onError(throwable);
+                               if (publishProcessor.hasSubscribers())
+                                   publishProcessor.onError(throwable);
                            }
                        }catch (Throwable e){
                            Log.d(TAG, "accept: "+e);

@@ -29,6 +29,11 @@ import retrofit2.http.Url;
  * arunsachin222@gmail.com
  * Chennai
  */
+
+
+/**
+ * A interface has the abstracts method to access the all type of request types and API calls
+ */
 public interface ApiInterfaceService
 {
     //Get custom object Request
@@ -87,10 +92,14 @@ public interface ApiInterfaceService
 
 
 
-    //Post okkhttp3 ResponseBody  request
+    /**
+     *
 
-
-    /*Post type network calls */
+     //Post okkhttp3 ResponseBody  request
+     Post type network calls
+     * @param url
+     * @return
+     */
 
 
     @Headers({"Accept: application/json"})
@@ -145,14 +154,10 @@ public interface ApiInterfaceService
     Single<ResponseBody> postSingleMultipartBodyQueryParamRequest(@Url String url, @Part MultipartBody.Part file,@QueryMap Map<String,String> partParams,@Body  RequestBody BrequestBody);
 
 
+    /**
+     *     Flowable post request type method
+      */
 
-
-
-
-
-
-
-    // Flowable post request type method
 
     @Headers({"Accept: application/json"})
     @POST

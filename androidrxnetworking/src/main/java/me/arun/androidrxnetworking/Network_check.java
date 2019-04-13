@@ -1,17 +1,27 @@
 package me.arun.androidrxnetworking;
+
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-public class Network_check
-{
-    /**
-     * Created by Arun Pandian M on 21/December/2018
-     * arunsachin222@gmail.com
-     * Chennai
-     */
 
-    public static boolean isNetworkAvailable(Context context)
-    {
+
+/**
+ * Created by Arun Pandian M on 21/December/2018
+ * arunsachin222@gmail.com
+ * Chennai
+ */
+
+/**
+ * A
+ */
+public class Network_check {
+
+    /**
+     * A method to check the internet is available or not
+     * @param context a context of the current screen
+     * @return it returns the true if ht enetwork is available
+     */
+    public static boolean isNetworkAvailable(Context context) {
         boolean networkavailable = false;
 
         try {

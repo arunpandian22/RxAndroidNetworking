@@ -5,6 +5,10 @@ package me.arun.androidrxnetworking;
  * arunsachin222@gmail.com
  * Chennai
  */
+
+/**
+ * A class has the constant values to used in multiple place
+ */
 public class RxNetworkUtilConstants {
     public static String NETWORK_CONNECTION_ERROR = "Network connection failure.";
     public static boolean SHOW_NETWORK_ERROR = false;

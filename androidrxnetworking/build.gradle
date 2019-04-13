@@ -1,4 +1,56 @@
 apply plugin: 'com.android.library'
+apply plugin: "guru.stefma.bintrayrelease"
+//apply plugin: 'com.novoda.bintray-release'
+
+
+//
+//
+publish {
+
+    def groupProjectID = 'me.arun.androidrxnetworking'
+    def artifactProjectID = 'androidrxnetworking'
+    def publishVersionID = '1.0.0'
+    userOrg = 'arunpandian22'
+    repoName = 'RxDroidNetWorkCall'
+//    groupId = groupProjectID
+    artifactId = artifactProjectID
+    version = "1.0.0"
+    group = groupProjectID
+    androidArtifact { // 2
+        artifactId = "androidrxnetworking"
+    }
+//    publishVersion = publishVersionID
+    desc = 'Android Rx Networking Library is a powerful library for doing any type of networking in Android applications which is made on top of Retrofit Using RxJava. No other library provides or supports Network calling using RxJava.'
+    website = 'https://github.com/arunpandian22/RxAndroidNetworking'
+
+}
+
+//ext {
+//
+//    //For bintray and jcenter distribution
+//    bintrayRepo = 'RxDroidNetWorkCall'
+//    bintrayName = 'me.arun.androidrxnetworking'
+//
+//    publishedGroupId = 'me.arun'
+//    libraryName = 'RxNetworkCall'
+//    artifact = 'androidrxnetworking' //This artifact name should be the same with library module name
+//
+//    libraryDescription = 'Android Rx Networking Library is a powerful library for doing any type of networking in Android applications which is made on top of Retrofit Using RxJava. No other library provides or supports Network calling using RxJava.'
+//
+//    siteUrl = 'https://github.com/arunpandian22/RxAndroidNetworking'
+//    gitUrl = 'https://github.com/arunpandian22/RxAndroidNetworking.git'
+//
+//    libraryVersion = '1.0.0'
+//
+//    developerId = 'arunpandian22'
+//    developerName = 'Arun Pandian'
+//    developerEmail = 'arunsachin222@gmail.com'
+//    organization = 'arunpandian22' // if you push to organization's repository.
+//    licenseName = 'The Apache Software License, Version 2.0'  //Example for license
+//    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//    allLicenses = ["Apache-2.0"]
+//
+//}
 
 android {
     compileSdkVersion 28
@@ -21,7 +73,24 @@ android {
         }
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
+    tasks.withType(Javadoc) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding', 'UTF-8')
+        options.addStringOption('charSet', 'UTF-8')
+    }
+
+
+
+
+
+
 }
+
+
 
 dependencies {
 
@@ -51,3 +120,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
+
+//apply from: 'https://raw.githubusercontent.com/quangctkm9207/template-files/master/android/gradle/install.gradle'
+//apply from: 'https://raw.githubusercontent.com/quangctkm9207/template-files/master/android/gradle/bintray.gradle'

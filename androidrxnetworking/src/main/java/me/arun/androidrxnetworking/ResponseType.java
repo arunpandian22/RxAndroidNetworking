@@ -19,6 +19,11 @@ import static me.arun.androidrxnetworking.ResponseType.STRING;
  * arunsachin222@gmail.com
  * Chennai
  */
+
+
+/**
+ * a annotation is used to define the Response type
+ */
 @Retention(SOURCE)
 @StringDef({STRING, JSON_OBJECT, JSON_ARRAY, OK_HTTP, BITMAP, PREFETCH, PARSED})
 public @interface ResponseType

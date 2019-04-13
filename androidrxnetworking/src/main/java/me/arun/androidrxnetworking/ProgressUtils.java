@@ -10,9 +10,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-/**
- * Created by Jaison on 03/02/17.
- */
 
 public class ProgressUtils {
 

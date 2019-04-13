@@ -3,7 +3,7 @@ package me.arun.androidrxnetworking;
 import android.graphics.Color;
 
 /**
- * Created by Jaison.
+ * A class created to store the data for the  progressbar data
  */
 public class ProgressBarData {
     int DEFAULT_BACKGROUND_COLOR = Color.parseColor("#FFFFFF");

@@ -40,6 +40,7 @@ public class RxNetworkRequest<T>
     String TAG="RxNetworkRequest";
     Activity activity;
 
+
     private RxNetworkRequest(RxNetworkRequestBuilder rxNetworkRequestBuilder)
     {
         this.endPoint = rxNetworkRequestBuilder.endPoint;
@@ -374,7 +375,10 @@ public class RxNetworkRequest<T>
     }
 
 
-
+    /**
+     * A class to build the objects for the making API request
+     * @param <T> it is generic class type
+     */
     public static class RxNetworkRequestBuilder<T>
     {
         String endPoint;
@@ -384,9 +388,6 @@ public class RxNetworkRequest<T>
         String responseType;
         private Class<T> responseClaasType;
         private RequestBody requestBody;
-
-
-
         MultipartBody.Part file;
         @RequestType
         String requestType;
@@ -406,24 +407,47 @@ public class RxNetworkRequest<T>
         }
 
 
+        /**
+         * A method to set the endpoint
+         * @param endPoint endpoint of api calls
+         * @return it returns this Builder object
+         */
         public RxNetworkRequestBuilder setEndPoint(String endPoint)
         {
             this.endPoint = endPoint;
             return this;
         }
 
+        /**
+         * A method to set the observable the API call in rxjava
+         * @param observableType observble type to set in the Rx Java call
+         * @return it returns this Builder object
+         */
         public RxNetworkRequestBuilder setObservableType(@ObservableType String observableType)
         {
             this.observableType = observableType;
             return this;
         }
 
+
+        /**
+         * A method to set the responseType for returning t
+         * @param responseType it has the value for the in which class the response should be return
+         * @return it returns this Builder object
+         */
+        @Deprecated
         public RxNetworkRequestBuilder setResponseType(@ResponseType String responseType)
         {
             this.responseType = responseType;
             return this;
         }
 
+
+        /**
+         * A method to set the set the HTTP request type
+         * @param requestType it has the value of the HTTP request type
+         * @return  it returns this Builder object
+         */
         public RxNetworkRequestBuilder setRequestType(@RequestType String requestType)
         {
             this.requestType = requestType;
@@ -431,48 +455,93 @@ public class RxNetworkRequest<T>
         }
 
 
+        /**
+         * A method to get the multipart file
+         * @return it returns the multpart file which has to be sent as a param
+         */
         public MultipartBody.Part getFile() {
             return file;
         }
 
+        /**
+         * A method to set the file to params for send the file as a multipart file
+         * @param file  the  file which has to be sent as a multipart param
+         * @return it returns this Builder object
+         */
         public RxNetworkRequestBuilder setFile(MultipartBody.Part file) {
             this.file = file;
             return this;
         }
+
+        /**
+         * A method to set the custom response type
+         * @param responseClaasType has the custom object which is the response model should be return
+         * @return it returns this Builder object
+         */
         public RxNetworkRequestBuilder setResponseClaasType(Class<T> responseClaasType)
         {
             this.responseClaasType = responseClaasType;
             return this;
         }
 
+        /**
+         * A method to set the requestbody to send the params
+         * @param requestBody the param has requestbody which has to be sent in params
+         * @return it returns this Builder object
+         */
         public RxNetworkRequestBuilder setRequestBody(RequestBody requestBody)
         {
             this.requestBody = requestBody;
             return this;
         }
 
+
+        /**
+         * A method to set the normal string params
+         * @param queryParams a query params which has to be sent as a string params
+         * @return it returns this Builder object
+         */
         public RxNetworkRequestBuilder setQueryParams(Map<String, String> queryParams)
         {
             this.queryParams = queryParams;
             return this;
         }
 
+        /**
+         * A method to set the form data params
+         * @param fieldsParams a hashmap params which has to be sent as the form data param
+         * @return it returns this Builder object
+         */
         public RxNetworkRequestBuilder setFieldsParams(Map<String, String> fieldsParams) {
             this.fieldsParams = fieldsParams;
             return this;
         }
 
+        /**
+         * A method to set the form data when the multipart file has to be sent
+         * @param partParams  a hashmap params which has to be sent as the form data param  with the multipart file
+         * @return it returns this Builder object
+         */
         public RxNetworkRequestBuilder setPartParams(Map<String, String> partParams) {
             this.partParams = partParams;
             return this;
         }
 
+        /**
+         * A method to set the header params in API call
+         * @param headerParams   a hashmap params which has to be sent as header param
+         * @return it returns this Builder object
+         */
         public RxNetworkRequestBuilder setHeaderParams(Map<String, String> headerParams) {
             this.headerParams = headerParams;
             return this;
         }
 
 
+        /**
+         * A method to build the required object to make API request
+         * @return
+         */
         public RxNetworkRequest<T> build() {
             return new RxNetworkRequest(this);
         }

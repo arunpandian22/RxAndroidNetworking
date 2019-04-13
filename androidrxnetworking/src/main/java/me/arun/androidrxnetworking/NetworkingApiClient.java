@@ -52,9 +52,11 @@ public class NetworkingApiClient
     }
 
 
-
-
-
+    /**
+     * A method to get the retrofit object with  common headers
+     * @param commonHeaders  a common headers for all the api call
+     * @return it returns the retrofit object with common headers
+     */
 
     public static Retrofit getRetrofitWithHeaders(Map<String, String> commonHeaders)
     {
@@ -63,11 +65,20 @@ public class NetworkingApiClient
     }
 
 
+    /**
+     * a method to set the common headers for the api call
+     * @param commonHeaders a common headers for all the api call
+     */
     public static void setCommonHeaders(HashMap<String, String> commonHeaders) {
         if (commonHeaders != null)
             commonHeader = commonHeaders;
     }
 
+    /**
+     * A method to get the HTTP client with common headers
+     * @param headers a headers for the HTTP client
+     * @return it returns the HTTP client with headers
+     */
     private static OkHttpClient get_HTTPClient(final Map<String, String> headers) {
         final OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(new Interceptor() {
@@ -200,12 +211,20 @@ public class NetworkingApiClient
                 .build();
     }
 
-
+    /**
+     * a method to set the progresbar show data
+     * @param progressBarDataDefaultValue a param has the object of the ProgressbarData
+     */
     public static void setProgressBarData(ProgressBarData progressBarDataDefaultValue)
     {
         if (progressBarDataDefaultValue != null)
             progressBarData = progressBarDataDefaultValue;
     }
+
+    /**
+     * A method to get the ProgressBarData object
+     * @return it returns the object for the ProgressbarData
+     */
 
     public static ProgressBarData getProgressBarData() {
         return progressBarData;

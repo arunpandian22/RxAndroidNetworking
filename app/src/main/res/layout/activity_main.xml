@@ -9,9 +9,10 @@
     <Toolbar
         android:id="@+id/toolbar"
         style="@style/AppTheme"
-        app:titleTextColor="@color/colorAbTitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/colorAbTitle">
     </Toolbar>
 
     <android.support.v7.widget.RecyclerView
@@ -25,6 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
     </android.support.v7.widget.RecyclerView>
 
 </android.support.constraint.ConstraintLayout>

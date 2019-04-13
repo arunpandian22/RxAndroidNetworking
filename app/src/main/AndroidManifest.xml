@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.arun.andoridrxnetworking">
+    package="me.arun.andoridrxnetworkingsample">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-        android:name=".RXNetworkingApplication"
+        android:name="me.arun.andoridrxnetworkingsample.RXNetworkingApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="me.arun.andoridrxnetworkingsample.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,19 +24,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".sampleRequest.SampleRequestActivity"
+        <activity android:name="me.arun.andoridrxnetworkingsample.sampleRequest.SampleRequestActivity"
             android:screenOrientation="portrait" />
 
 
-        <activity android:name=".fileUpload.FileUploadActivity"
+        <activity android:name="me.arun.andoridrxnetworkingsample.fileUpload.FileUploadActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".fileDownload.FileDownloadActivity"
+            android:name="me.arun.andoridrxnetworkingsample.fileDownload.FileDownloadActivity"
             android:label="@string/title_activity_file_download"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".graphQlRequest.GraphQlActivity"
+        <activity android:name="me.arun.andoridrxnetworkingsample.graphQlRequest.GraphQlActivity"
             android:screenOrientation="portrait"/>
     </application>
 
