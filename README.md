@@ -15,7 +15,7 @@ No other library provides or supports Network calling using RxJava.
 * we can choose thread whether the main thread or worker thread to get response. (Thread Handlings)
 
 
-** Dependency **
+**Dependency**
 
 Add the following dependency in your app level build.gradle
 
